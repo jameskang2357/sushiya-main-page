@@ -93,6 +93,8 @@ body {
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #2a1810 0%, #3d2817 100%);
+    background-size: cover;
+    background-position: center;
     text-align: center;
     padding: 100px 30px;
     overflow: hidden;
@@ -258,6 +260,202 @@ body {
     margin: 0 auto 20px;
     line-height: 2;
 }
+
+/* Gallery Section */
+.gallery-section {
+    padding: 80px 30px;
+    background: #ffffff;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #f5f1eb;
+    border: 2px solid #d4a574;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 30px 20px;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: #2a1810;
+    border-color: #d4a574;
+}
+
+.gallery-item:hover .gallery-pdf-icon {
+    transform: scale(1.2);
+    color: #d4a574;
+}
+
+.gallery-item:hover .gallery-pdf-name {
+    color: #d4a574;
+}
+
+.gallery-pdf-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #2a1810;
+}
+
+.gallery-pdf-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #3d2817;
+    text-align: center;
+    transition: color 0.3s ease;
+    word-break: break-word;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* PDF Modal Styles */
+.pdf-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    overflow-y: auto;
+}
+
+.pdf-modal.active {
+    display: block;
+}
+
+.pdf-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42, 24, 16, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.pdf-modal-content {
+    position: relative;
+    max-width: 95%;
+    width: 1200px;
+    margin: 40px auto;
+    background: #f5f1eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pdf-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: #2a1810;
+    color: #d4a574;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10001;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-modal-close:hover {
+    background: #d4a574;
+    color: #2a1810;
+    transform: rotate(90deg);
+}
+
+.pdf-modal-header {
+    background: #2a1810;
+    color: #d4a574;
+    padding: 20px 60px 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.pdf-modal-header h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: #d4a574;
+}
+
+.pdf-download-btn {
+    background: #d4a574;
+    color: #2a1810;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.pdf-download-btn:hover {
+    background: #f5f1eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212, 165, 116, 0.3);
+}
+
+.pdf-modal-body {
+    padding: 20px;
+    background: #ffffff;
+    min-height: 600px;
+}
+
+.pdf-modal-body iframe {
+    width: 100%;
+    height: 80vh;
+    min-height: 600px;
+    border: none;
+    border-radius: 8px;
+}
+
 
 .contact {
     padding: 80px 30px;
@@ -618,6 +816,41 @@ body {
     .delivery-link {
         min-width: 100px;
         padding: 15px 20px;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    .gallery-item {
+        min-height: 150px;
+        padding: 20px 15px;
+    }
+    .gallery-pdf-icon {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .gallery-pdf-name {
+        font-size: 16px;
+    }
+    .pdf-modal-content {
+        max-width: 98%;
+        margin: 20px auto;
+    }
+    .pdf-modal-header {
+        padding: 15px 50px 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .pdf-modal-header h3 {
+        font-size: 20px;
+    }
+    .pdf-modal-body {
+        padding: 10px;
+        min-height: 400px;
+    }
+    .pdf-modal-body iframe {
+        min-height: 500px;
+        height: 70vh;
     }
 }
 

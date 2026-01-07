@@ -233,8 +233,84 @@ if (contactForm && formStatus) {
             formStatus.style.display = 'block';
             
             // Scroll to status message
-            formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } finally {
+    formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// PDF Gallery Modal
+const pdfModal = document.getElementById('pdfModal');
+const pdfModalClose = document.getElementById('pdfModalClose');
+const pdfModalFrame = document.getElementById('pdfModalFrame');
+const pdfModalTitle = document.getElementById('pdfModalTitle');
+const pdfModalDownload = document.getElementById('pdfModalDownload');
+const galleryItems = document.querySelectorAll('.gallery-item[data-pdf]');
+
+// Function to open PDF modal
+function openPdfModal(pdfPath, pdfName) {
+    if (!pdfModal || !pdfModalFrame || !pdfModalTitle) return;
+    
+    // Set PDF source
+    pdfModalFrame.src = pdfPath;
+    
+    // Set title (remove .pdf extension if present, capitalize)
+    const displayName = pdfName.replace(/\.pdf$/i, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    pdfModalTitle.textContent = displayName;
+    
+    // Set download link
+    if (pdfModalDownload) {
+        pdfModalDownload.href = pdfPath;
+        pdfModalDownload.download = pdfName;
+    }
+    
+    // Show modal
+    pdfModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+// Function to close PDF modal
+function closePdfModal() {
+    if (!pdfModal) return;
+    
+    pdfModal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+    
+    // Clear iframe src to stop PDF rendering
+    if (pdfModalFrame) {
+        pdfModalFrame.src = '';
+    }
+}
+
+// Add click handlers to gallery items
+if (galleryItems.length > 0) {
+    galleryItems.forEach(item => {
+        const pdfPath = item.getAttribute('data-pdf');
+        const pdfName = pdfPath.split('/').pop(); // Get filename from path
+        
+        item.addEventListener('click', () => {
+            // Check if PDF exists before opening (optional - you can remove this check)
+            openPdfModal(pdfPath, pdfName);
+        });
+    });
+}
+
+// Close modal when clicking close button
+if (pdfModalClose) {
+    pdfModalClose.addEventListener('click', closePdfModal);
+}
+
+// Close modal when clicking overlay
+if (pdfModal) {
+    const overlay = pdfModal.querySelector('.pdf-modal-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', closePdfModal);
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && pdfModal && pdfModal.classList.contains('active')) {
+        closePdfModal();
+    }
+}); finally {
             // Re-enable submit button
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;

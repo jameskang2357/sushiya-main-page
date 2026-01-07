@@ -56,6 +56,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact-form-section">Contact</a></li>
                 <li><a href="https://sushiya.menufy.com/" class="btn-order" target="_blank" rel="noopener noreferrer">Order</a></li>
             </ul>
@@ -138,6 +139,69 @@
         </div>
     </section>
 
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <p class="section-subtitle">A glimpse of our restaurant and cuisine</p>
+            <div class="gallery-grid">
+                <!-- Gallery PDF files - upload PDFs to /img/ directory -->
+                <!-- Filenames without .pdf extension will be displayed -->
+                <!-- Click to open PDF in modal viewer -->
+                <div class="gallery-item" data-pdf="/img/gallery-1.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-1</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-2.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-2</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-3.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-3</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-4.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-4</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-5.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-5</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-6.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-6</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-7.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-7</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-8.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-8</p>
+                </div>
+                <div class="gallery-item" data-pdf="/img/gallery-9.pdf">
+                    <div class="gallery-pdf-icon">📄</div>
+                    <p class="gallery-pdf-name">gallery-9</p>
+                </div>
+            </div>
+            
+            <!-- PDF Modal -->
+            <div id="pdfModal" class="pdf-modal">
+                <div class="pdf-modal-overlay"></div>
+                <div class="pdf-modal-content">
+                    <button class="pdf-modal-close" id="pdfModalClose" aria-label="Close PDF viewer">&times;</button>
+                    <div class="pdf-modal-header">
+                        <h3 id="pdfModalTitle">PDF Viewer</h3>
+                        <a href="#" id="pdfModalDownload" class="pdf-download-btn" target="_blank" rel="noopener noreferrer" download>Download PDF</a>
+                    </div>
+                    <div class="pdf-modal-body">
+                        <iframe id="pdfModalFrame" src="" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="contact">
         <div class="container">
             <h2>Visit Us</h2>
@@ -205,9 +269,10 @@
                 <h3>Find Us</h3>
                 <div class="map-wrapper">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2867.5!2d-123.0868!3d44.0521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54c0e8b5b5b5b5b5%3A0x5b5b5b5b5b5b5b5b!2s5%20E%208th%20Ave%2C%20Eugene%2C%20OR%2097401!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2867.5!2d-123.0868!3d44.0521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54c11e135fbb1edd%3A0x4c424dcc3ebc93b5!2sSushi%20Ya!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus" 
                         width="100%" 
                         height="400" 
+                        style="border:0;" 
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade"
