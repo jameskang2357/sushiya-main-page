@@ -12,35 +12,112 @@
     <nav class="navbar">
         <div class="container">
             <h1 class="logo">Sushi Ya</h1>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="https://sushiya.menufy.com/" class="btn-order">Order</a></li>
+                <li><a href="https://sushiya.menufy.com/" class="btn-order" target="_blank" rel="noopener">Order</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h2>Authentic Japanese Cuisine</h2>
             <p>Traditional flavors crafted with care in Eugene</p>
-            <a href="https://sushiya.menufy.com/" class="btn" target="_blank">Order Online</a>
+            <div class="hero-buttons">
+                <a href="https://sushiya.menufy.com/" class="btn" target="_blank" rel="noopener">Order Online</a>
+                <a href="#menu" class="btn btn-secondary">View Menu</a>
+            </div>
         </div>
     </section>
 
-    <section class="about">
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            <p class="section-subtitle">Explore our selection of authentic Japanese dishes</p>
+            
+            <div class="menu-categories">
+                <div class="menu-category">
+                    <h3>Sushi & Sashimi</h3>
+                    <p>Fresh fish, expertly prepared by our skilled sushi chefs</p>
+                </div>
+                <div class="menu-category">
+                    <h3>Lunch Specials</h3>
+                    <p>Perfect midday meals with bento boxes and lunch combos</p>
+                </div>
+                <div class="menu-category">
+                    <h3>Dinner Entrées</h3>
+                    <p>Heartwarming traditional dishes for dinner</p>
+                </div>
+                <div class="menu-category">
+                    <h3>Appetizers & Salads</h3>
+                    <p>Start your meal with our selection of appetizers</p>
+                </div>
+                <div class="menu-category">
+                    <h3>Ramen & Noodles</h3>
+                    <p>Comforting bowls of ramen and traditional noodle dishes</p>
+                </div>
+                <div class="menu-category">
+                    <h3>Drinks & Desserts</h3>
+                    <p>Complete your meal with beverages and sweet treats</p>
+                </div>
+            </div>
+
+            <div class="menu-cta">
+                <a href="https://sushiya.menufy.com/" class="btn" target="_blank" rel="noopener">View Full Menu & Order</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
         <div class="container">
             <h2>Our Story</h2>
-            <p>Bringing authentic Japanese cuisine to Eugene with traditional techniques and fresh, local ingredients.</p>
+            <p>Bringing authentic Japanese cuisine to Eugene with traditional techniques and fresh, local ingredients. Our menu features a complete selection including fresh sushi and sashimi, bento boxes, tempura, ramen, and more.</p>
+            <p>Whether you're dining in or ordering for delivery, we're committed to providing you with exceptional quality and warm hospitality. Located in downtown Eugene, Sushi Ya is perfect for casual dining, family meals, or group gatherings.</p>
         </div>
     </section>
 
-    <footer class="contact">
+    <section id="contact" class="contact">
         <div class="container">
-            <p>5 E 8th Ave, Eugene, OR 97401 | (541) 686-3464</p>
+            <h2>Visit Us</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Location</h3>
+                    <p>5 E 8th Ave<br>Eugene, OR 97401</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Phone</h3>
+                    <p><a href="tel:5416863464">(541) 686-3464</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>Hours</h3>
+                    <p>
+                        <strong>Mon - Thu:</strong> 11:30 AM - 9:15 PM<br>
+                        <strong>Fri & Sat:</strong> 11:30 AM - 9:45 PM<br>
+                        <strong>Sun:</strong> 11:30 AM - 9:15 PM
+                    </p>
+                </div>
+            </div>
+            <div class="contact-cta">
+                <a href="https://sushiya.menufy.com/" class="btn" target="_blank" rel="noopener">Order Online</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Sushi Ya. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
