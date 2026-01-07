@@ -26,6 +26,29 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Menu",
+        "name": "Sushi Ya Menu",
+        "description": "Complete menu featuring fresh sushi, sashimi, ramen, bento boxes, and traditional Japanese dishes.",
+        "provider": {
+            "@type": "Restaurant",
+            "name": "Sushi Ya",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "5 E 8th Ave",
+                "addressLocality": "Eugene",
+                "addressRegion": "OR",
+                "postalCode": "97401",
+                "addressCountry": "US"
+            },
+            "telephone": "+15416863464"
+        }
+    }
+    </script>
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -38,6 +61,7 @@
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
                 <li><a href="index.html#contact-form-section">Contact</a></li>
                 <li><a href="https://sushiya.menufy.com/" class="btn-order" target="_blank" rel="noopener noreferrer">Order</a></li>
             </ul>

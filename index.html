@@ -44,6 +44,78 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Sushi Ya",
+        "image": "https://sushiyaeugene.com/og-image.jpg",
+        "description": "Authentic Japanese cuisine, fresh sushi, and traditional dishes in the heart of Eugene, Oregon.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "5 E 8th Ave",
+            "addressLocality": "Eugene",
+            "addressRegion": "OR",
+            "postalCode": "97401",
+            "addressCountry": "US"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "44.0521",
+            "longitude": "-123.0868"
+        },
+        "url": "https://sushiyaeugene.com",
+        "telephone": "+15416863464",
+        "priceRange": "$$",
+        "servesCuisine": "Japanese",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+                "opens": "11:30",
+                "closes": "21:15"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Friday", "Saturday"],
+                "opens": "11:30",
+                "closes": "21:45"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "11:30",
+                "closes": "21:15"
+            }
+        ],
+        "menu": "https://sushiyaeugene.com/menu.html",
+        "orderUrl": "https://sushiya.menufy.com/",
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Sushi Ya Menu",
+            "itemListElement": [
+                {
+                    "@type": "OfferCatalog",
+                    "name": "Sushi & Sashimi"
+                },
+                {
+                    "@type": "OfferCatalog",
+                    "name": "Lunch Specials"
+                },
+                {
+                    "@type": "OfferCatalog",
+                    "name": "Dinner Entrées"
+                },
+                {
+                    "@type": "OfferCatalog",
+                    "name": "Ramen & Noodles"
+                }
+            ]
+        }
+    }
+    </script>
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
