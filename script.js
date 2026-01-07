@@ -67,25 +67,55 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
+/**
+ * Input sanitization to prevent XSS attacks
+ * @param {string} str - Input string to sanitize
+ * @returns {string} - Sanitized string
+ */
+function sanitizeInput(str) {
+    if (typeof str !== 'string') return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML.trim();
+}
+
+/**
+ * Validate email format
+ * @param {string} email - Email to validate
+ * @returns {boolean} - True if valid
+ */
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+/**
+ * Validate and sanitize phone number
+ * @param {string} phone - Phone number to validate
+ * @returns {string} - Sanitized phone or empty string
+ */
+function sanitizePhone(phone) {
+    if (!phone) return '';
+    // Remove all non-digit characters except +, -, (, ), and spaces
+    const cleaned = phone.replace(/[^\d+\-() ]/g, '');
+    // Limit length to prevent abuse
+    return cleaned.substring(0, 20);
+}
+
 // Contact Form Handling with EmailJS
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
 // Initialize EmailJS when the page loads
 window.addEventListener('DOMContentLoaded', function() {
-    // Wait a bit for EmailJS library to load
     setTimeout(function() {
         if (typeof emailjs !== 'undefined') {
-            // Initialize EmailJS with your public key
             emailjs.init('EMZzJc2STeSrosYUF');
-            console.log('EmailJS initialized successfully');
-        } else {
-            console.error('EmailJS library not loaded. Check that the script is included in index.html');
         }
     }, 100);
 });
 
-if (contactForm) {
+if (contactForm && formStatus) {
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -93,41 +123,85 @@ if (contactForm) {
         formStatus.style.display = 'none';
         formStatus.className = 'form-status';
         
-        // Disable submit button
+        // Get form elements
+        const nameInput = contactForm.querySelector('#name');
+        const emailInput = contactForm.querySelector('#email');
+        const phoneInput = contactForm.querySelector('#phone');
+        const messageInput = contactForm.querySelector('#message');
         const submitBtn = contactForm.querySelector('.btn-submit');
+        
+        if (!nameInput || !emailInput || !messageInput || !submitBtn) {
+            return;
+        }
+        
+        // Get and sanitize form data
+        const rawName = nameInput.value.trim();
+        const rawEmail = emailInput.value.trim();
+        const rawPhone = phoneInput.value.trim();
+        const rawMessage = messageInput.value.trim();
+        
+        // Validate required fields
+        if (!rawName || !rawEmail || !rawMessage) {
+            formStatus.textContent = 'Please fill in all required fields.';
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+            return;
+        }
+        
+        // Validate email format
+        if (!isValidEmail(rawEmail)) {
+            formStatus.textContent = 'Please enter a valid email address.';
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+            return;
+        }
+        
+        // Validate input lengths to prevent abuse
+        if (rawName.length > 100) {
+            formStatus.textContent = 'Name is too long. Please keep it under 100 characters.';
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+            return;
+        }
+        
+        if (rawMessage.length > 2000) {
+            formStatus.textContent = 'Message is too long. Please keep it under 2000 characters.';
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+            return;
+        }
+        
+        // Sanitize all inputs
+        const sanitizedData = {
+            from_name: sanitizeInput(rawName),
+            from_email: sanitizeInput(rawEmail),
+            phone: rawPhone ? sanitizePhone(rawPhone) : 'Not provided',
+            message: sanitizeInput(rawMessage)
+        };
+        
+        // Disable submit button
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
         
-        // Get form data
-        const formData = {
-            from_name: contactForm.querySelector('#name').value,
-            from_email: contactForm.querySelector('#email').value,
-            phone: contactForm.querySelector('#phone').value || 'Not provided',
-            message: contactForm.querySelector('#message').value,
-            to_email: 'k1218dj@gmail.com'
-        };
-        
         try {
             // Check if EmailJS is initialized
             if (typeof emailjs === 'undefined') {
-                throw new Error('EmailJS library not loaded. Please refresh the page.');
+                throw new Error('Email service is not available. Please refresh the page and try again.');
             }
             
             // Send email using EmailJS
-            const response = await emailjs.send(
-                'service_by0uekf',    // Your EmailJS service ID
-                'template_rp3pcg6',   // Your EmailJS template ID
+            await emailjs.send(
+                'service_by0uekf',
+                'template_rp3pcg6',
                 {
                     to_email: 'k1218dj@gmail.com',
-                    from_name: formData.from_name,
-                    from_email: formData.from_email,
-                    phone: formData.phone,
-                    message: formData.message
+                    from_name: sanitizedData.from_name,
+                    from_email: sanitizedData.from_email,
+                    phone: sanitizedData.phone,
+                    message: sanitizedData.message
                 }
             );
-            
-            console.log('EmailJS Response:', response);
             
             // Success
             formStatus.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
@@ -141,22 +215,17 @@ if (contactForm) {
             formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             
         } catch (error) {
-            // Error - log detailed error for debugging
-            console.error('EmailJS Error Details:', error);
-            console.error('Error Status:', error.status);
-            console.error('Error Text:', error.text);
-            
+            // Error handling - don't expose sensitive details to users
             let errorMessage = 'There was an error sending your message. ';
             
-            // Provide more specific error messages
             if (error.status === 400) {
                 errorMessage += 'Please check that all required fields are filled correctly.';
             } else if (error.status === 401) {
-                errorMessage += 'Email service configuration error. Please contact the website administrator.';
-            } else if (error.status === 0) {
+                errorMessage += 'Service configuration error. Please contact us directly at (541) 686-3464.';
+            } else if (error.status === 0 || !navigator.onLine) {
                 errorMessage += 'Network error. Please check your internet connection and try again.';
             } else {
-                errorMessage += `Error code: ${error.status}. Please try again or call us at (541) 686-3464.`;
+                errorMessage += 'Please try again later or call us at (541) 686-3464.';
             }
             
             formStatus.textContent = errorMessage;
