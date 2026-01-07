@@ -244,12 +244,50 @@ const pdfModalTitle = document.getElementById('pdfModalTitle');
 const pdfModalDownload = document.getElementById('pdfModalDownload');
 const galleryItems = document.querySelectorAll('.gallery-item[data-pdf]');
 
+// Check if PDF exists (returns Promise)
+async function checkPdfExists(pdfPath) {
+    try {
+        const response = await fetch(pdfPath, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+}
+
+// Hide gallery items for PDFs that don't exist
+async function validateGalleryItems() {
+    if (galleryItems.length === 0) return;
+    
+    const promises = Array.from(galleryItems).map(async (item) => {
+        const pdfPath = item.getAttribute('data-pdf');
+        const exists = await checkPdfExists(pdfPath);
+        
+        if (!exists) {
+            item.style.display = 'none';
+            return false;
+        }
+        return true;
+    });
+    
+    await Promise.all(promises);
+}
+
+// Initialize gallery validation on page load
+if (galleryItems.length > 0) {
+    validateGalleryItems();
+}
+
 // Function to open PDF modal
 function openPdfModal(pdfPath, pdfName) {
-    if (!pdfModal || !pdfModalFrame || !pdfModalTitle) return;
+    if (!pdfModal || !pdfModalTitle) return;
     
-    // Set PDF source
-    pdfModalFrame.src = pdfPath;
+    // Show loading state
+    const modalBody = pdfModal.querySelector('.pdf-modal-body');
+    let pdfFrame = null;
+    if (modalBody) {
+        modalBody.innerHTML = '<div class="pdf-loading">Loading PDF...</div><iframe id="pdfModalFrame" src="" frameborder="0" style="display: none;"></iframe>';
+        pdfFrame = document.getElementById('pdfModalFrame'); // Re-get reference
+    }
     
     // Set title (remove .pdf extension if present, capitalize)
     const displayName = pdfName.replace(/\.pdf$/i, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
@@ -259,11 +297,73 @@ function openPdfModal(pdfPath, pdfName) {
     if (pdfModalDownload) {
         pdfModalDownload.href = pdfPath;
         pdfModalDownload.download = pdfName;
+        pdfModalDownload.style.display = 'inline-block';
     }
     
     // Show modal
     pdfModal.classList.add('active');
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    
+    // Set PDF source and handle load/error
+    if (pdfFrame && modalBody) {
+        pdfFrame.onload = function() {
+            // PDF loaded successfully
+            const loading = modalBody.querySelector('.pdf-loading');
+            if (loading) {
+                loading.style.display = 'none';
+            }
+            if (pdfFrame) {
+                pdfFrame.style.display = 'block';
+            }
+        };
+        
+        pdfFrame.onerror = function() {
+            // PDF failed to load
+            showPdfError(modalBody, pdfPath);
+        };
+        
+        // Set src after event handlers
+        pdfFrame.src = pdfPath;
+        
+        // Fallback: if iframe doesn't fire onload/onerror within 10 seconds, check status
+        setTimeout(() => {
+            const loading = modalBody.querySelector('.pdf-loading');
+            if (loading && loading.style.display !== 'none') {
+                // Check if iframe has content (may not work due to CORS, but try anyway)
+                try {
+                    if (!pdfFrame.contentDocument || !pdfFrame.contentDocument.body) {
+                        // If still loading after 10 seconds, hide loading (assume it's taking time or will error)
+                        loading.style.display = 'none';
+                        if (pdfFrame) {
+                            pdfFrame.style.display = 'block';
+                        }
+                    }
+                } catch (e) {
+                    // Cross-origin - assume it's loading or loaded, hide loading indicator
+                    loading.style.display = 'none';
+                    if (pdfFrame) {
+                        pdfFrame.style.display = 'block';
+                    }
+                }
+            }
+        }, 10000);
+    }
+}
+
+// Show error message in modal
+function showPdfError(modalBody, pdfPath) {
+    modalBody.innerHTML = `
+        <div class="pdf-error">
+            <div class="pdf-error-icon">⚠️</div>
+            <h4>Unable to Load PDF</h4>
+            <p>The PDF file could not be loaded. It may not exist or there was an error accessing it.</p>
+            <p class="pdf-error-path">Path: ${pdfPath}</p>
+            <button class="btn pdf-retry-btn" onclick="location.reload()">Reload Page</button>
+        </div>
+    `;
+    if (pdfModalDownload) {
+        pdfModalDownload.style.display = 'none';
+    }
 }
 
 // Function to close PDF modal
@@ -272,6 +372,12 @@ function closePdfModal() {
     
     pdfModal.classList.remove('active');
     document.body.style.overflow = ''; // Restore scrolling
+    
+    // Reset modal body
+    const modalBody = pdfModal.querySelector('.pdf-modal-body');
+    if (modalBody) {
+        modalBody.innerHTML = '<iframe id="pdfModalFrame" src="" frameborder="0"></iframe>';
+    }
     
     // Clear iframe src to stop PDF rendering
     if (pdfModalFrame) {
@@ -286,7 +392,6 @@ if (galleryItems.length > 0) {
         const pdfName = pdfPath.split('/').pop(); // Get filename from path
         
         item.addEventListener('click', () => {
-            // Check if PDF exists before opening (optional - you can remove this check)
             openPdfModal(pdfPath, pdfName);
         });
     });
@@ -310,11 +415,5 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && pdfModal && pdfModal.classList.contains('active')) {
         closePdfModal();
     }
-}); finally {
-            // Re-enable submit button
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-        }
-    });
-}
+});
 

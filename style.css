@@ -456,6 +456,62 @@ body {
     border-radius: 8px;
 }
 
+/* PDF Loading and Error States */
+.pdf-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    min-height: 600px;
+    font-size: 18px;
+    color: #5a4a3a;
+    font-family: 'Crimson Text', serif;
+}
+
+.pdf-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    min-height: 600px;
+    padding: 40px;
+    text-align: center;
+}
+
+.pdf-error-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.pdf-error h4 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    color: #2a1810;
+    margin-bottom: 15px;
+}
+
+.pdf-error p {
+    font-size: 16px;
+    color: #5a4a3a;
+    margin-bottom: 10px;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.pdf-error-path {
+    font-size: 14px;
+    color: #8a7a6a;
+    font-family: monospace;
+    word-break: break-all;
+    margin-top: 20px;
+}
+
+.pdf-retry-btn {
+    margin-top: 30px;
+    padding: 12px 30px;
+}
+
 
 .contact {
     padding: 80px 30px;
