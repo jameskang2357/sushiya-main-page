@@ -233,187 +233,192 @@ if (contactForm && formStatus) {
             formStatus.style.display = 'block';
             
             // Scroll to status message
-    formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-// PDF Gallery Modal
-const pdfModal = document.getElementById('pdfModal');
-const pdfModalClose = document.getElementById('pdfModalClose');
-const pdfModalFrame = document.getElementById('pdfModalFrame');
-const pdfModalTitle = document.getElementById('pdfModalTitle');
-const pdfModalDownload = document.getElementById('pdfModalDownload');
-const galleryItems = document.querySelectorAll('.gallery-item[data-pdf]');
-
-// Check if PDF exists (returns Promise)
-async function checkPdfExists(pdfPath) {
-    try {
-        const response = await fetch(pdfPath, { method: 'HEAD' });
-        return response.ok;
-    } catch (error) {
-        return false;
-    }
-}
-
-// Hide gallery items for PDFs that don't exist
-async function validateGalleryItems() {
-    if (galleryItems.length === 0) return;
-    
-    const promises = Array.from(galleryItems).map(async (item) => {
-        const pdfPath = item.getAttribute('data-pdf');
-        const exists = await checkPdfExists(pdfPath);
-        
-        if (!exists) {
-            item.style.display = 'none';
-            return false;
+            formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
-        return true;
+        
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
     });
-    
-    await Promise.all(promises);
 }
 
-// Initialize gallery validation on page load
-if (galleryItems.length > 0) {
-    validateGalleryItems();
-}
+// Image Gallery with Lightbox
+const lightboxModal = document.getElementById('lightboxModal');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
 
-// Function to open PDF modal
-function openPdfModal(pdfPath, pdfName) {
-    if (!pdfModal || !pdfModalTitle) return;
+let galleryImages = [];
+let currentImageIndex = 0;
+
+// Load and render gallery images dynamically from images.json
+async function loadGalleryImages() {
+    const galleryGrid = document.getElementById('galleryGrid');
+    const galleryLoading = document.getElementById('galleryLoading');
     
-    // Show loading state
-    const modalBody = pdfModal.querySelector('.pdf-modal-body');
-    let pdfFrame = null;
-    if (modalBody) {
-        modalBody.innerHTML = '<div class="pdf-loading">Loading PDF...</div><iframe id="pdfModalFrame" src="" frameborder="0" style="display: none;"></iframe>';
-        pdfFrame = document.getElementById('pdfModalFrame'); // Re-get reference
-    }
+    if (!galleryGrid) return;
     
-    // Set title (remove .pdf extension if present, capitalize)
-    const displayName = pdfName.replace(/\.pdf$/i, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-    pdfModalTitle.textContent = displayName;
-    
-    // Set download link
-    if (pdfModalDownload) {
-        pdfModalDownload.href = pdfPath;
-        pdfModalDownload.download = pdfName;
-        pdfModalDownload.style.display = 'inline-block';
-    }
-    
-    // Show modal
-    pdfModal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    
-    // Set PDF source and handle load/error
-    if (pdfFrame && modalBody) {
-        pdfFrame.onload = function() {
-            // PDF loaded successfully
-            const loading = modalBody.querySelector('.pdf-loading');
-            if (loading) {
-                loading.style.display = 'none';
+    try {
+        // Try relative path first (for local development), then absolute (for production)
+        let response;
+        
+        try {
+            response = await fetch('./images.json');
+            if (!response.ok) throw new Error('Relative path failed');
+        } catch (e) {
+            response = await fetch('/images.json');
+            if (!response.ok) {
+                throw new Error(`Failed to load images configuration: ${response.status}`);
             }
-            if (pdfFrame) {
-                pdfFrame.style.display = 'block';
-            }
-        };
+        }
         
-        pdfFrame.onerror = function() {
-            // PDF failed to load
-            showPdfError(modalBody, pdfPath);
-        };
+        const data = await response.json();
+        const images = data.images || [];
         
-        // Set src after event handlers
-        pdfFrame.src = pdfPath;
+        if (!Array.isArray(images) || images.length === 0) {
+            throw new Error('No images configured');
+        }
         
-        // Fallback: if iframe doesn't fire onload/onerror within 10 seconds, check status
-        setTimeout(() => {
-            const loading = modalBody.querySelector('.pdf-loading');
-            if (loading && loading.style.display !== 'none') {
-                // Check if iframe has content (may not work due to CORS, but try anyway)
-                try {
-                    if (!pdfFrame.contentDocument || !pdfFrame.contentDocument.body) {
-                        // If still loading after 10 seconds, hide loading (assume it's taking time or will error)
-                        loading.style.display = 'none';
-                        if (pdfFrame) {
-                            pdfFrame.style.display = 'block';
-                        }
-                    }
-                } catch (e) {
-                    // Cross-origin - assume it's loading or loaded, hide loading indicator
-                    loading.style.display = 'none';
-                    if (pdfFrame) {
-                        pdfFrame.style.display = 'block';
-                    }
-                }
-            }
-        }, 10000);
-    }
-}
-
-// Show error message in modal
-function showPdfError(modalBody, pdfPath) {
-    modalBody.innerHTML = `
-        <div class="pdf-error">
-            <div class="pdf-error-icon">⚠️</div>
-            <h4>Unable to Load PDF</h4>
-            <p>The PDF file could not be loaded. It may not exist or there was an error accessing it.</p>
-            <p class="pdf-error-path">Path: ${pdfPath}</p>
-            <button class="btn pdf-retry-btn" onclick="location.reload()">Reload Page</button>
-        </div>
-    `;
-    if (pdfModalDownload) {
-        pdfModalDownload.style.display = 'none';
-    }
-}
-
-// Function to close PDF modal
-function closePdfModal() {
-    if (!pdfModal) return;
-    
-    pdfModal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
-    
-    // Reset modal body
-    const modalBody = pdfModal.querySelector('.pdf-modal-body');
-    if (modalBody) {
-        modalBody.innerHTML = '<iframe id="pdfModalFrame" src="" frameborder="0"></iframe>';
-    }
-    
-    // Clear iframe src to stop PDF rendering
-    if (pdfModalFrame) {
-        pdfModalFrame.src = '';
-    }
-}
-
-// Add click handlers to gallery items
-if (galleryItems.length > 0) {
-    galleryItems.forEach(item => {
-        const pdfPath = item.getAttribute('data-pdf');
-        const pdfName = pdfPath.split('/').pop(); // Get filename from path
+        // Store images for lightbox navigation
+        galleryImages = images.map(img => ({
+            src: `./img/${img.file}`,
+            name: img.name || img.file.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '').replace(/[-_]/g, ' ')
+        }));
         
-        item.addEventListener('click', () => {
-            openPdfModal(pdfPath, pdfName);
+        // Clear loading message
+        if (galleryLoading) {
+            galleryLoading.style.display = 'none';
+        }
+        
+        // Generate gallery items
+        galleryGrid.innerHTML = galleryImages.map((img, index) => `
+            <div class="gallery-item" data-index="${index}">
+                <img src="${img.src}" alt="${img.name}" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p class="gallery-item-name">${img.name}</p>
+                </div>
+            </div>
+        `).join('');
+        
+        // Attach click handlers
+        document.querySelectorAll('.gallery-item[data-index]').forEach(item => {
+            item.addEventListener('click', () => {
+                const index = parseInt(item.getAttribute('data-index'));
+                openLightbox(index);
+            });
         });
-    });
-}
-
-// Close modal when clicking close button
-if (pdfModalClose) {
-    pdfModalClose.addEventListener('click', closePdfModal);
-}
-
-// Close modal when clicking overlay
-if (pdfModal) {
-    const overlay = pdfModal.querySelector('.pdf-modal-overlay');
-    if (overlay) {
-        overlay.addEventListener('click', closePdfModal);
+        
+    } catch (error) {
+        console.error('Error loading gallery:', error);
+        if (galleryLoading) {
+            galleryLoading.textContent = 'Unable to load gallery. Please refresh the page.';
+            galleryLoading.style.color = '#721c24';
+        }
     }
 }
 
-// Close modal with Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && pdfModal && pdfModal.classList.contains('active')) {
-        closePdfModal();
+// Open lightbox at specific index
+function openLightbox(index) {
+    if (!lightboxModal || galleryImages.length === 0) return;
+    
+    currentImageIndex = index;
+    updateLightboxImage();
+    
+    lightboxModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Update lightbox image and caption
+function updateLightboxImage() {
+    if (!lightboxImage || !galleryImages[currentImageIndex]) return;
+    
+    const img = galleryImages[currentImageIndex];
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.name;
+    
+    if (lightboxCaption) {
+        lightboxCaption.textContent = img.name;
     }
+    
+    // Update nav button visibility
+    if (lightboxPrev) {
+        lightboxPrev.style.display = currentImageIndex > 0 ? 'flex' : 'none';
+    }
+    if (lightboxNext) {
+        lightboxNext.style.display = currentImageIndex < galleryImages.length - 1 ? 'flex' : 'none';
+    }
+}
+
+// Navigate to previous image
+function prevImage() {
+    if (currentImageIndex > 0) {
+        currentImageIndex--;
+        updateLightboxImage();
+    }
+}
+
+// Navigate to next image
+function nextImage() {
+    if (currentImageIndex < galleryImages.length - 1) {
+        currentImageIndex++;
+        updateLightboxImage();
+    }
+}
+
+// Close lightbox
+function closeLightbox() {
+    if (!lightboxModal) return;
+    
+    lightboxModal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Initialize gallery on page load
+window.addEventListener('DOMContentLoaded', () => {
+    loadGalleryImages();
 });
 
+// Event listeners for lightbox
+if (lightboxClose) {
+    lightboxClose.addEventListener('click', closeLightbox);
+}
+
+if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevImage();
+    });
+}
+
+if (lightboxNext) {
+    lightboxNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextImage();
+    });
+}
+
+if (lightboxModal) {
+    const overlay = lightboxModal.querySelector('.lightbox-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', closeLightbox);
+    }
+}
+
+// Keyboard navigation for lightbox
+document.addEventListener('keydown', (e) => {
+    if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
+    
+    switch (e.key) {
+        case 'Escape':
+            closeLightbox();
+            break;
+        case 'ArrowLeft':
+            prevImage();
+            break;
+        case 'ArrowRight':
+            nextImage();
+            break;
+    }
+});

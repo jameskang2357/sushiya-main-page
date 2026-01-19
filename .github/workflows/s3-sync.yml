@@ -21,6 +21,28 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       
+      - name: Generate image gallery list
+        run: |
+          # Auto-generate images.json from all images in img/ directory
+          echo '{"images":[' > images.json
+          first=true
+          for img in img/*.jpg img/*.JPG img/*.jpeg img/*.JPEG img/*.png img/*.PNG img/*.webp img/*.WEBP 2>/dev/null; do
+            if [ -f "$img" ]; then
+              filename=$(basename "$img")
+              # Create display name: remove extension, replace - and _ with spaces, title case
+              displayname=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | sed 's/\b\(.\)/\u\1/g')
+              if [ "$first" = true ]; then
+                first=false
+              else
+                echo ',' >> images.json
+              fi
+              echo "{\"name\":\"$displayname\",\"file\":\"$filename\"}" >> images.json
+            fi
+          done
+          echo ']}' >> images.json
+          echo "Generated images.json:"
+          cat images.json
+
       - name: Sync files to S3
         run: |
           aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} \
@@ -28,6 +50,5 @@ jobs:
             --exclude ".github/*" \
             --exclude ".gitignore" \
             --exclude "README.md" \
-            --exclude "img/*" \
             --delete  # Remove files in S3 that don't exist locally
 

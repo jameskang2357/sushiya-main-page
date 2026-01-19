@@ -1,6 +1,3 @@
-# Image directory - uploaded directly to S3
-/img/
-
 # Placeholder assets (upload real versions to S3)
 favicon.ico
 og-image.jpg
