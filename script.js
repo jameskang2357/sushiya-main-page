@@ -259,15 +259,23 @@ async function loadGalleryImages() {
     if (!galleryGrid) return;
     
     try {
-        // Try relative path first (for local development), then absolute (for production)
+        // Try absolute path first (for production), then relative (for local dev)
         let response;
+        let imagesJsonPath;
+        
+        // Production path first
         try {
-            response = await fetch('./images.json');
-            if (!response.ok) throw new Error('Relative path failed');
+            imagesJsonPath = '/images.json';
+            response = await fetch(imagesJsonPath);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
         } catch (e) {
-            response = await fetch('/images.json');
-            if (!response.ok) {
-                throw new Error(`Failed to load images: ${response.status}`);
+            // Fallback to relative path for local development
+            try {
+                imagesJsonPath = './images.json';
+                response = await fetch(imagesJsonPath);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            } catch (e2) {
+                throw new Error(`Failed to load images.json: ${e.message || e2.message}`);
             }
         }
         
@@ -275,7 +283,7 @@ async function loadGalleryImages() {
         const images = data.images || [];
         
         if (!Array.isArray(images) || images.length === 0) {
-            throw new Error('No images configured');
+            throw new Error('No images found in images.json');
         }
         
         // Store images for lightbox navigation
@@ -310,8 +318,13 @@ async function loadGalleryImages() {
     } catch (error) {
         console.error('Error loading gallery:', error);
         if (galleryLoading) {
-            galleryLoading.textContent = 'Unable to load gallery. Please refresh the page.';
-            galleryLoading.style.color = '#721c24';
+            galleryLoading.innerHTML = `
+                <div style="color: #721c24; padding: 20px;">
+                    <strong>Unable to load gallery.</strong><br>
+                    ${error.message || 'Please refresh the page.'}<br>
+                    <small>Check browser console (F12) for details.</small>
+                </div>
+            `;
         }
     }
 }
