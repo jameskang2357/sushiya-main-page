@@ -52,20 +52,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Navbar background on scroll
-let lastScroll = 0;
 const navbar = document.querySelector('.navbar');
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-    } else {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    }
-    
-    lastScroll = currentScroll;
-});
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+        navbar.style.boxShadow = scrollY > 100 
+            ? '0 2px 20px rgba(0, 0, 0, 0.15)' 
+            : '0 2px 10px rgba(0, 0, 0, 0.1)';
+    });
+}
 
 /**
  * Input sanitization to prevent XSS attacks
@@ -253,7 +249,9 @@ const lightboxNext = document.getElementById('lightboxNext');
 let galleryImages = [];
 let currentImageIndex = 0;
 
-// Load and render gallery images dynamically from images.json
+/**
+ * Load and render gallery images dynamically from images.json
+ */
 async function loadGalleryImages() {
     const galleryGrid = document.getElementById('galleryGrid');
     const galleryLoading = document.getElementById('galleryLoading');
@@ -263,14 +261,13 @@ async function loadGalleryImages() {
     try {
         // Try relative path first (for local development), then absolute (for production)
         let response;
-        
         try {
             response = await fetch('./images.json');
             if (!response.ok) throw new Error('Relative path failed');
         } catch (e) {
             response = await fetch('/images.json');
             if (!response.ok) {
-                throw new Error(`Failed to load images configuration: ${response.status}`);
+                throw new Error(`Failed to load images: ${response.status}`);
             }
         }
         
@@ -287,7 +284,7 @@ async function loadGalleryImages() {
             name: img.name || img.file.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '').replace(/[-_]/g, ' ')
         }));
         
-        // Clear loading message
+        // Hide loading message
         if (galleryLoading) {
             galleryLoading.style.display = 'none';
         }
@@ -303,9 +300,9 @@ async function loadGalleryImages() {
         `).join('');
         
         // Attach click handlers
-        document.querySelectorAll('.gallery-item[data-index]').forEach(item => {
+        galleryGrid.querySelectorAll('.gallery-item[data-index]').forEach(item => {
             item.addEventListener('click', () => {
-                const index = parseInt(item.getAttribute('data-index'));
+                const index = parseInt(item.getAttribute('data-index'), 10);
                 openLightbox(index);
             });
         });
@@ -319,18 +316,22 @@ async function loadGalleryImages() {
     }
 }
 
-// Open lightbox at specific index
+/**
+ * Open lightbox at specific index
+ */
 function openLightbox(index) {
     if (!lightboxModal || galleryImages.length === 0) return;
     
-    currentImageIndex = index;
+    currentImageIndex = Math.max(0, Math.min(index, galleryImages.length - 1));
     updateLightboxImage();
     
     lightboxModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-// Update lightbox image and caption
+/**
+ * Update lightbox image and caption
+ */
 function updateLightboxImage() {
     if (!lightboxImage || !galleryImages[currentImageIndex]) return;
     
@@ -351,7 +352,9 @@ function updateLightboxImage() {
     }
 }
 
-// Navigate to previous image
+/**
+ * Navigate to previous image
+ */
 function prevImage() {
     if (currentImageIndex > 0) {
         currentImageIndex--;
@@ -359,7 +362,9 @@ function prevImage() {
     }
 }
 
-// Navigate to next image
+/**
+ * Navigate to next image
+ */
 function nextImage() {
     if (currentImageIndex < galleryImages.length - 1) {
         currentImageIndex++;
@@ -367,7 +372,9 @@ function nextImage() {
     }
 }
 
-// Close lightbox
+/**
+ * Close lightbox
+ */
 function closeLightbox() {
     if (!lightboxModal) return;
     
@@ -375,50 +382,55 @@ function closeLightbox() {
     document.body.style.overflow = '';
 }
 
-// Initialize gallery on page load
+/**
+ * Initialize lightbox event listeners
+ */
+function initLightboxListeners() {
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevImage();
+        });
+    }
+
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextImage();
+        });
+    }
+
+    if (lightboxModal) {
+        const overlay = lightboxModal.querySelector('.lightbox-overlay');
+        if (overlay) {
+            overlay.addEventListener('click', closeLightbox);
+        }
+    }
+
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+        if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
+        
+        switch (e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+        }
+    });
+}
+
+// Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
-});
-
-// Event listeners for lightbox
-if (lightboxClose) {
-    lightboxClose.addEventListener('click', closeLightbox);
-}
-
-if (lightboxPrev) {
-    lightboxPrev.addEventListener('click', (e) => {
-        e.stopPropagation();
-        prevImage();
-    });
-}
-
-if (lightboxNext) {
-    lightboxNext.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextImage();
-    });
-}
-
-if (lightboxModal) {
-    const overlay = lightboxModal.querySelector('.lightbox-overlay');
-    if (overlay) {
-        overlay.addEventListener('click', closeLightbox);
-    }
-}
-
-// Keyboard navigation for lightbox
-document.addEventListener('keydown', (e) => {
-    if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
-    
-    switch (e.key) {
-        case 'Escape':
-            closeLightbox();
-            break;
-        case 'ArrowLeft':
-            prevImage();
-            break;
-        case 'ArrowRight':
-            nextImage();
-            break;
-    }
+    initLightboxListeners();
 });

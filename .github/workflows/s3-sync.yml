@@ -22,11 +22,13 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       
       - name: Generate image gallery list
+        shell: bash
         run: |
           # Auto-generate images.json from all images in img/ directory
+          shopt -s nullglob
           echo '{"images":[' > images.json
           first=true
-          for img in img/*.jpg img/*.JPG img/*.jpeg img/*.JPEG img/*.png img/*.PNG img/*.webp img/*.WEBP 2>/dev/null; do
+          for img in img/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}; do
             if [ -f "$img" ]; then
               filename=$(basename "$img")
               # Create display name: remove extension, replace - and _ with spaces, title case
