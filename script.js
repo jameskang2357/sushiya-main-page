@@ -260,20 +260,35 @@ async function loadGalleryImages() {
     
     try {
         // Try absolute path first (for production), then relative (for local dev)
+        // Add cache-busting query param to prevent Chrome caching issues
+        const cacheBuster = `?v=${Date.now()}`;
         let response;
         let imagesJsonPath;
+        let basePath = '';
         
         // Production path first
         try {
-            imagesJsonPath = '/images.json';
-            response = await fetch(imagesJsonPath);
+            imagesJsonPath = '/images.json' + cacheBuster;
+            response = await fetch(imagesJsonPath, {
+                cache: 'no-store',
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            basePath = '/img/';
         } catch (e) {
             // Fallback to relative path for local development
             try {
-                imagesJsonPath = './images.json';
-                response = await fetch(imagesJsonPath);
+                imagesJsonPath = './images.json' + cacheBuster;
+                response = await fetch(imagesJsonPath, {
+                    cache: 'no-store',
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                basePath = './img/';
             } catch (e2) {
                 throw new Error(`Failed to load images.json: ${e.message || e2.message}`);
             }
@@ -286,9 +301,9 @@ async function loadGalleryImages() {
             throw new Error('No images found in images.json');
         }
         
-        // Store images for lightbox navigation
+        // Store images for lightbox navigation - use consistent path
         galleryImages = images.map(img => ({
-            src: `./img/${img.file}`,
+            src: basePath + img.file,
             name: img.name || img.file.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '').replace(/[-_]/g, ' ')
         }));
         
