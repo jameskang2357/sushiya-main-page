@@ -301,10 +301,9 @@ async function loadGalleryImages() {
             throw new Error('No images found in images.json');
         }
         
-        // Store images for lightbox navigation - use consistent path
+        // Store images for lightbox navigation
         galleryImages = images.map(img => ({
-            src: basePath + img.file,
-            name: img.name || img.file.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '').replace(/[-_]/g, ' ')
+            src: basePath + img.file
         }));
         
         // Hide loading message
@@ -315,10 +314,7 @@ async function loadGalleryImages() {
         // Generate gallery items
         galleryGrid.innerHTML = galleryImages.map((img, index) => `
             <div class="gallery-item" data-index="${index}">
-                <img src="${img.src}" alt="${img.name}" loading="lazy">
-                <div class="gallery-item-overlay">
-                    <p class="gallery-item-name">${img.name}</p>
-                </div>
+                <img src="${img.src}" alt="Sushi Ya cuisine" loading="lazy">
             </div>
         `).join('');
         
