@@ -361,10 +361,12 @@ function updateLightboxImage() {
     
     const img = galleryImages[currentImageIndex];
     lightboxImage.src = img.src;
-    lightboxImage.alt = img.name;
+    lightboxImage.alt = 'Sushi Ya cuisine';
     
+    // Hide caption - no file names displayed
     if (lightboxCaption) {
-        lightboxCaption.textContent = img.name;
+        lightboxCaption.textContent = '';
+        lightboxCaption.style.display = 'none';
     }
     
     // Update nav button visibility
