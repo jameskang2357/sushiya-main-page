@@ -92,7 +92,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #2a1810 0%, #3d2817 100%);
+    background: linear-gradient(135deg, #2a1810 0%, #3d2817 100%); /* Fallback */
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -100,11 +100,36 @@ body {
     overflow: hidden;
 }
 
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This will zoom/crop to fill - vertical images will zoom in */
+    object-position: center; /* Centers the image when cropping */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-slideshow img.active {
+    opacity: 1;
+}
+
 .hero-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><pattern id="wood" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%232a1810"/><circle cx="25" cy="25" r="1" fill="%233d2817" opacity="0.3"/><circle cx="75" cy="75" r="1" fill="%233d2817" opacity="0.3"/></pattern><rect width="100" height="100" fill="url(%23wood)"/></svg>');
-    opacity: 0.1;
+    background: rgba(42, 24, 16, 0.6); /* Darker overlay for better text contrast */
+    z-index: 1;
 }
 
 .hero-content {
@@ -265,6 +290,39 @@ body {
 .gallery-section {
     padding: 80px 30px;
     background: #ffffff;
+}
+
+/* Gallery Mobile Notice */
+.gallery-mobile-notice {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: #f5f1eb;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.gallery-mobile-notice p {
+    font-size: 18px;
+    color: #3d2817;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.btn-gallery-mobile {
+    background: #d4a574;
+    color: #2a1810;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.btn-gallery-mobile:hover {
+    background: #c49464;
+    transform: translateY(-2px);
 }
 
 .gallery-grid {
@@ -823,6 +881,16 @@ body {
         min-width: 100px;
         padding: 15px 20px;
     }
+    /* Hide gallery grid on mobile */
+    .gallery-section .gallery-grid {
+        display: none;
+    }
+    
+    /* Show mobile notice on mobile */
+    .gallery-mobile-notice {
+        display: block;
+    }
+    
     .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 12px;

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - Sushi Ya</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo"><a href="index.html" class="logo-link">Sushi Ya</a></h1>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="index.html#contact-form-section">Contact</a></li>
+                <li><a href="https://sushiya.menufy.com/" class="btn-order" target="_blank" rel="noopener noreferrer">Order</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="gallery-section" style="margin-top: 70px;">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <p class="section-subtitle">A glimpse of our restaurant and cuisine</p>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-loading" id="galleryLoading">Loading gallery...</div>
+            </div>
+            
+            <!-- Image Lightbox Modal -->
+            <div id="lightboxModal" class="lightbox-modal">
+                <div class="lightbox-overlay"></div>
+                <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+                <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
+                <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+                <div class="lightbox-content">
+                    <img id="lightboxImage" src="" alt="">
+                    <p class="lightbox-caption" id="lightboxCaption"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sushi Ya</h4>
+                    <p>Authentic Japanese cuisine in Eugene, Oregon</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Order Online</h4>
+                    <div class="footer-delivery-links">
+                        <a href="https://sushiya.menufy.com/" target="_blank" rel="noopener noreferrer">Menufy</a>
+                        <a href="https://www.doordash.com/en/store/sushi-ya-eugene-373640/935563/?srsltid=AfmBOoqktO5qqdBEGI0JyvLXuLAQZ88UdnI_OBLMnba6C6cG1D3_A7rs" target="_blank" rel="noopener noreferrer">DoorDash</a>
+                        <a href="https://www.ubereats.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w?srsltid=AfmBOorZCoyX78WVqvFmZgIx_hdVKGoIR7Y0HOu0MfZSyz_R0_9p-upf" target="_blank" rel="noopener noreferrer">Uber Eats</a>
+                        <a href="https://www.grubhub.com/restaurant/sushi-ya-5-e-8th-ave-eugene/330358" target="_blank" rel="noopener noreferrer">Grubhub</a>
+                        <a href="https://postmates.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" target="_blank" rel="noopener noreferrer">Postmates</a>
+                    </div>
+                </div>
+            </div>
+            <p>&copy; 2026 Sushi Ya. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
