@@ -102,6 +102,10 @@ function sanitizePhone(phone) {
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
+// Rate limiting for form submissions
+let lastSubmissionTime = 0;
+const SUBMISSION_COOLDOWN = 30000; // 30 seconds in milliseconds
+
 // Initialize EmailJS when the page loads
 window.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
@@ -114,6 +118,18 @@ window.addEventListener('DOMContentLoaded', function() {
 if (contactForm && formStatus) {
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // Rate limiting check
+        const now = Date.now();
+        const timeSinceLastSubmission = now - lastSubmissionTime;
+        
+        if (timeSinceLastSubmission < SUBMISSION_COOLDOWN) {
+            const remainingSeconds = Math.ceil((SUBMISSION_COOLDOWN - timeSinceLastSubmission) / 1000);
+            formStatus.textContent = `Please wait ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''} before submitting again.`;
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+            return;
+        }
         
         // Hide previous status messages
         formStatus.style.display = 'none';
@@ -203,6 +219,9 @@ if (contactForm && formStatus) {
             formStatus.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
             formStatus.className = 'form-status success';
             formStatus.style.display = 'block';
+            
+            // Update last submission time for rate limiting
+            lastSubmissionTime = Date.now();
             
             // Reset form
             contactForm.reset();
