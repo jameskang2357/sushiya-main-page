@@ -474,48 +474,8 @@ function initLightboxListeners() {
     });
 }
 
-// Hero Slideshow with specific images
-const heroImages = [
-    'img/MandE.JPG',
-    'img/beefbento.JPG',
-    'img/bigboat.JPG',
-    'img/chickenbentotop.jpg',
-    'img/nabeyaki.jpg',
-    'img/cyakifront.JPG'
-];
-
-function initHeroSlideshow() {
-    const heroSection = document.querySelector('.hero');
-    if (!heroSection) return;
-    
-    const slideshowContainer = heroSection.querySelector('.hero-slideshow');
-    if (!slideshowContainer) return;
-    
-    // Preload images and add to slideshow
-    heroImages.forEach((src, index) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = 'Sushi Ya cuisine';
-        img.loading = 'eager'; // Load hero images immediately
-        if (index === 0) img.classList.add('active');
-        slideshowContainer.appendChild(img);
-    });
-    
-    // Rotate slides every 6 seconds (slightly longer for better viewing)
-    let currentIndex = 0;
-    setInterval(() => {
-        const images = slideshowContainer.querySelectorAll('img');
-        if (images.length === 0) return;
-        
-        images[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].classList.add('active');
-    }, 6000);
-}
-
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
     initLightboxListeners();
-    initHeroSlideshow(); // Add slideshow initialization
 });
