@@ -479,3 +479,41 @@ window.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
     initLightboxListeners();
 });
+
+// Theme Switcher
+(function() {
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeDropdown = document.getElementById('themeDropdown');
+    const swatches = document.querySelectorAll('.theme-swatch');
+
+    const savedTheme = localStorage.getItem('sushiya-theme') || '';
+    applyTheme(savedTheme);
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            themeDropdown.classList.toggle('open');
+        });
+    }
+
+    document.addEventListener('click', function() {
+        if (themeDropdown) themeDropdown.classList.remove('open');
+    });
+
+    swatches.forEach(function(swatch) {
+        swatch.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const theme = swatch.getAttribute('data-theme');
+            applyTheme(theme);
+            localStorage.setItem('sushiya-theme', theme);
+            themeDropdown.classList.remove('open');
+        });
+    });
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        swatches.forEach(function(s) {
+            s.classList.toggle('active', s.getAttribute('data-theme') === theme);
+        });
+    }
+})();
