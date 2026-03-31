@@ -57,8 +57,8 @@ const navbar = document.querySelector('.navbar');
 if (navbar) {
     window.addEventListener('scroll', () => {
         const scrollY = window.pageYOffset;
-        navbar.style.boxShadow = scrollY > 100 
-            ? '0 2px 20px rgba(0, 0, 0, 0.15)' 
+        navbar.style.boxShadow = scrollY > 100
+            ? '0 2px 20px rgba(0, 0, 0, 0.15)'
             : '0 2px 10px rgba(0, 0, 0, 0.1)';
     });
 }
@@ -250,7 +250,7 @@ if (contactForm && formStatus) {
             // Scroll to status message
             formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
-        
+
         // Re-enable submit button
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
