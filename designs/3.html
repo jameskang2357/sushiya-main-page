@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design 3: Tokyo Editorial — Sushi Ya</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Space Grotesk',sans-serif;background:#fafafa;color:#111;}
+nav{padding:20px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #111;background:#fafafa;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:#111;text-decoration:none;font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;transition:color .2s;}
+.nav-links a:hover{color:#e00;}
+.nav-order-btn{background:#e00;color:#fff;padding:10px 24px;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:background .2s;}
+.nav-order-btn:hover{background:#c00;}
+
+.hero{display:grid;grid-template-columns:1fr 380px;min-height:90vh;border-bottom:2px solid #111;}
+.hero-main{padding:80px 60px;display:flex;flex-direction:column;justify-content:space-between;border-right:2px solid #111;}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.hero-tag{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#e00;border:2px solid #e00;padding:6px 14px;}
+.hero-vol{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#999;}
+.hero-headline{font-family:'Playfair Display',serif;font-size:clamp(64px,7vw,96px);font-weight:900;line-height:.95;letter-spacing:-2px;margin-top:40px;}
+.hero-headline em{font-style:italic;color:#e00;}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;}
+.hero-desc{max-width:420px;font-size:16px;line-height:1.7;color:#444;}
+.hero-btns{display:flex;gap:12px;flex-shrink:0;}
+.btn-red{background:#e00;color:#fff;padding:14px 28px;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s;}
+.btn-red:hover{background:#c00;}
+.btn-blk{background:#111;color:#fff;padding:14px 28px;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
+.btn-blk:hover{background:#333;}
+.hero-aside{display:flex;flex-direction:column;}
+.aside-block{padding:32px 28px;border-bottom:2px solid #111;flex:1;}
+.aside-block:last-child{border-bottom:none;}
+.aside-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#e00;margin-bottom:8px;}
+.aside-val{font-size:14px;line-height:1.7;color:#333;}
+.aside-val a{color:#111;text-decoration:none;}
+
+.marquee-strip{background:#111;color:#fafafa;padding:14px 0;overflow:hidden;white-space:nowrap;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;}
+.marquee-inner{display:inline-block;animation:marquee 20s linear infinite;}
+.marquee-inner span{margin:0 40px;color:#e00;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.menu-section{padding:80px 48px;}
+.menu-header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #111;padding-bottom:20px;margin-bottom:48px;}
+.menu-header h2{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;letter-spacing:-1px;}
+.menu-header a{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#e00;text-decoration:none;}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid #111;}
+.menu-card{padding:36px 28px;border-right:2px solid #111;border-bottom:2px solid #111;position:relative;overflow:hidden;transition:background .3s;}
+.menu-card:hover{background:#111;}
+.menu-card:hover h3,.menu-card:hover p{color:#fafafa;}
+.menu-card:nth-child(3n){border-right:none;}
+.menu-card:nth-child(n+4){border-bottom:none;}
+.menu-num{font-size:48px;font-weight:700;color:#f0f0f0;position:absolute;top:16px;right:20px;line-height:1;transition:color .3s;}
+.menu-card:hover .menu-num{color:#222;}
+.menu-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;position:relative;transition:color .3s;}
+.menu-card p{font-size:13px;color:#666;line-height:1.6;position:relative;transition:color .3s;}
+
+.cta-strip{background:#e00;padding:80px 48px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;}
+.cta-strip h2{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#fff;}
+.cta-strip-right{display:flex;flex-direction:column;gap:12px;text-align:right;}
+.cta-strip-right a{text-decoration:none;}
+.btn-white{background:#fff;color:#e00;padding:14px 32px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;}
+.cta-strip p{color:rgba(255,255,255,.7);font-size:14px;}
+
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid #111;}
+.info-cell{padding:40px 32px;border-right:2px solid #111;}
+.info-cell:last-child{border-right:none;}
+.info-cell-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#e00;margin-bottom:12px;}
+.info-cell-val{font-size:15px;line-height:1.7;color:#333;}
+.info-cell-val a{color:#111;text-decoration:none;font-weight:500;}
+
+footer{background:#111;color:#fafafa;padding:28px 48px;display:flex;justify-content:space-between;}
+footer p{font-size:12px;letter-spacing:1px;color:#666;}
+.back-link{color:#e00;text-decoration:none;font-size:12px;letter-spacing:1px;font-weight:600;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Sushi Ya</div>
+  <ul class="nav-links">
+    <li><a href="#">Menu</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li>
+    <li><a href="https://sushiya.menufy.com/" class="nav-order-btn" target="_blank">Order Now</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-main">
+    <div class="hero-top">
+      <span class="hero-tag">Eugene, OR</span>
+      <span class="hero-vol">Japanese · Sushi · Ramen</span>
+    </div>
+    <h1 class="hero-headline">Fresh<br><em>Japanese</em><br>Cuisine</h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">Sushi, ramen, bento boxes and traditional Japanese dishes. Located at 5 E 8th Ave in downtown Eugene.</p>
+      <div class="hero-btns">
+        <a href="https://sushiya.menufy.com/" class="btn-red" target="_blank">Order Online</a>
+        <a href="../menu.html" class="btn-blk">Menu</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-aside">
+    <div class="aside-block"><p class="aside-label">Address</p><p class="aside-val">5 E 8th Ave<br>Eugene, OR 97401</p></div>
+    <div class="aside-block"><p class="aside-label">Hours</p><p class="aside-val">Mon–Thu &amp; Sun<br>11:30 AM – 9:15 PM<br><br>Fri–Sat<br>11:30 AM – 9:45 PM</p></div>
+    <div class="aside-block"><p class="aside-label">Phone</p><p class="aside-val"><a href="tel:5416863464">(541) 686-3464</a></p></div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    Sushi &amp; Sashimi <span>·</span> Ramen &amp; Noodles <span>·</span> Bento Boxes <span>·</span> Teriyaki <span>·</span> Tempura <span>·</span> Donburi <span>·</span> Order Online <span>·</span>
+    Sushi &amp; Sashimi <span>·</span> Ramen &amp; Noodles <span>·</span> Bento Boxes <span>·</span> Teriyaki <span>·</span> Tempura <span>·</span> Donburi <span>·</span> Order Online <span>·</span>
+  </div>
+</div>
+
+<section class="menu-section">
+  <div class="menu-header">
+    <h2>Our Menu</h2>
+    <a href="../menu.html">View All →</a>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><div class="menu-num">01</div><h3>Sushi &amp; Sashimi</h3><p>Fresh fish, expertly prepared by our skilled chefs</p></div>
+    <div class="menu-card"><div class="menu-num">02</div><h3>Combos &amp; Bentos</h3><p>Complete meals with rice, salad, and your choice of main</p></div>
+    <div class="menu-card"><div class="menu-num">03</div><h3>Entrées</h3><p>Teriyaki, katsu, tempura, and grilled specials</p></div>
+    <div class="menu-card"><div class="menu-num">04</div><h3>Appetizers &amp; Salads</h3><p>Traditional Japanese starters and fresh salads</p></div>
+    <div class="menu-card"><div class="menu-num">05</div><h3>Ramen &amp; Noodles</h3><p>Rich broths, udon, yakisoba, and donburi</p></div>
+    <div class="menu-card"><div class="menu-num">06</div><h3>Sides &amp; Drinks</h3><p>Miso, rice, sake, beer, and mochi ice cream</p></div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Order for Pickup or Delivery</h2>
+  <div class="cta-strip-right">
+    <a href="https://sushiya.menufy.com/" class="btn-white" target="_blank">Order on Menufy</a>
+    <p>Also on DoorDash · Uber Eats · Grubhub</p>
+  </div>
+</div>
+
+<div class="info-grid">
+  <div class="info-cell"><p class="info-cell-label">Location</p><p class="info-cell-val">5 E 8th Ave<br>Eugene, OR 97401</p></div>
+  <div class="info-cell"><p class="info-cell-label">Phone</p><p class="info-cell-val"><a href="tel:5416863464">(541) 686-3464</a></p></div>
+  <div class="info-cell"><p class="info-cell-label">Mon–Thu &amp; Sun</p><p class="info-cell-val">11:30 AM – 9:15 PM</p></div>
+  <div class="info-cell"><p class="info-cell-label">Fri &amp; Sat</p><p class="info-cell-val">11:30 AM – 9:45 PM</p></div>
+</div>
+
+<footer>
+  <p>© 2026 Sushi Ya — Eugene, Oregon</p>
+  <a href="index.html" class="back-link">← All Designs</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design 5: Neon Yatai — Sushi Ya</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0e0e0e;color:#f0f0f0;}
+nav{padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:#0e0e0e;border-bottom:1px solid #222;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:#f0f0f0;}
+.logo span{color:#39ff14;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:#888;text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:#39ff14;}
+.nav-order-btn{background:#39ff14;color:#0e0e0e;padding:10px 22px;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
+.nav-order-btn:hover{background:#2ee00f;}
+
+.hero{padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:85vh;align-items:center;}
+.hero-left{padding-right:80px;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#39ff14;margin-bottom:24px;}
+.hero-left h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,9vw,130px);line-height:.92;letter-spacing:2px;color:#f0f0f0;margin-bottom:32px;}
+.hero-left h1 .outline{-webkit-text-stroke:2px #39ff14;color:transparent;}
+.hero-left p{font-size:16px;line-height:1.7;color:#888;margin-bottom:44px;max-width:380px;}
+.btn-neon{display:inline-block;background:#39ff14;color:#0e0e0e;padding:16px 36px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-right:16px;transition:all .2s;}
+.btn-neon:hover{background:#2ee00f;transform:translateY(-2px);}
+.btn-ghost-neon{display:inline-block;border:1px solid #39ff14;color:#39ff14;padding:16px 36px;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:all .2s;}
+.btn-ghost-neon:hover{background:rgba(57,255,20,.08);}
+.hero-right{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#222;}
+.stat-box{background:#141414;padding:40px 32px;}
+.stat-box:hover{background:#1a1a1a;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#39ff14;line-height:1;}
+.stat-label{font-size:12px;color:#666;margin-top:6px;font-weight:500;text-transform:uppercase;letter-spacing:1px;}
+
+.ticker{background:#39ff14;padding:12px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-block;animation:ticker 18s linear infinite;}
+.ticker-inner span{margin:0 32px;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0e0e0e;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.menu-section{padding:80px 48px;}
+.menu-section-header{margin-bottom:48px;}
+.menu-section-header h2{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;color:#f0f0f0;letter-spacing:2px;}
+.menu-section-header h2 span{color:#39ff14;}
+.menu-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#222;}
+.menu-card{background:#141414;padding:36px 28px;position:relative;overflow:hidden;transition:background .3s;}
+.menu-card:hover{background:#1a2e1a;}
+.menu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:#39ff14;transition:height .3s;}
+.menu-card:hover::before{height:100%;}
+.menu-card-icon{font-size:32px;margin-bottom:16px;}
+.menu-card h3{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:#f0f0f0;margin-bottom:8px;}
+.menu-card p{font-size:13px;color:#666;line-height:1.6;}
+
+.cta-section{margin:2px 0;background:#141414;padding:80px 48px;display:flex;justify-content:space-between;align-items:center;}
+.cta-section h2{font-family:'Bebas Neue',sans-serif;font-size:64px;color:#f0f0f0;letter-spacing:2px;}
+.cta-section h2 span{color:#39ff14;}
+.cta-right{display:flex;flex-direction:column;gap:16px;align-items:flex-end;}
+.delivery-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+.delivery-chip{border:1px solid #333;color:#888;padding:8px 18px;text-decoration:none;font-size:12px;font-weight:500;transition:all .2s;}
+.delivery-chip:hover{border-color:#39ff14;color:#39ff14;}
+
+.info-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#222;margin-top:2px;}
+.info-box{background:#141414;padding:40px 36px;}
+.info-box-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#39ff14;margin-bottom:12px;}
+.info-box-val{font-size:16px;color:#ccc;line-height:1.7;}
+.info-box-val a{color:#ccc;text-decoration:none;}
+
+footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-between;}
+footer p{font-size:12px;color:#444;}
+.back-link{color:#39ff14;text-decoration:none;font-size:12px;font-weight:600;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Sushi<span>Ya</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Menu</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li>
+    <li><a href="https://sushiya.menufy.com/" class="nav-order-btn" target="_blank">Order Now</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Eugene, Oregon · Open 7 Days</p>
+    <h1>Fresh<br><span class="outline">Sushi</span><br>Daily</h1>
+    <p>From hand-pressed nigiri to rich ramen bowls — authentic Japanese cuisine in the heart of Eugene.</p>
+    <div>
+      <a href="https://sushiya.menufy.com/" class="btn-neon" target="_blank">Order Online</a>
+      <a href="../menu.html" class="btn-ghost-neon">View Menu</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-box"><div class="stat-num">7</div><div class="stat-label">Days a Week</div></div>
+    <div class="stat-box"><div class="stat-num">13+</div><div class="stat-label">Menu Categories</div></div>
+    <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Delivery Platforms</div></div>
+    <div class="stat-box"><div class="stat-num">DT</div><div class="stat-label">Downtown Eugene</div></div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Sushi</span><span>Sashimi</span><span>Ramen</span><span>Bento</span><span>Teriyaki</span><span>Udon</span><span>Yakisoba</span><span>Tempura</span><span>Order Online</span>
+    <span>Sushi</span><span>Sashimi</span><span>Ramen</span><span>Bento</span><span>Teriyaki</span><span>Udon</span><span>Yakisoba</span><span>Tempura</span><span>Order Online</span>
+  </div>
+</div>
+
+<section class="menu-section">
+  <div class="menu-section-header"><h2>What We <span>Serve</span></h2></div>
+  <div class="menu-cards">
+    <div class="menu-card"><div class="menu-card-icon">🍣</div><h3>Sushi &amp; Sashimi</h3><p>Fresh fish, expertly prepared by our skilled chefs</p></div>
+    <div class="menu-card"><div class="menu-card-icon">🍱</div><h3>Combos &amp; Bentos</h3><p>Complete meals with rice, salad, and your choice of main</p></div>
+    <div class="menu-card"><div class="menu-card-icon">🍗</div><h3>Entrées</h3><p>Teriyaki, katsu, tempura, and grilled dishes</p></div>
+    <div class="menu-card"><div class="menu-card-icon">🥗</div><h3>Appetizers &amp; Salads</h3><p>Traditional Japanese starters and fresh salads</p></div>
+    <div class="menu-card"><div class="menu-card-icon">🍜</div><h3>Ramen &amp; Noodles</h3><p>Rich broths, udon, yakisoba, and donburi bowls</p></div>
+    <div class="menu-card"><div class="menu-card-icon">🍶</div><h3>Sides &amp; Drinks</h3><p>Sake, miso soup, rice, mochi ice cream</p></div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2>Order <span>Now</span></h2>
+  <div class="cta-right">
+    <a href="https://sushiya.menufy.com/" class="btn-neon" target="_blank">Order on Menufy</a>
+    <div class="delivery-chips">
+      <a href="https://www.doordash.com/en/store/sushi-ya-eugene-373640/935563/" class="delivery-chip" target="_blank">DoorDash</a>
+      <a href="https://www.ubereats.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" class="delivery-chip" target="_blank">Uber Eats</a>
+      <a href="https://www.grubhub.com/restaurant/sushi-ya-5-e-8th-ave-eugene/330358" class="delivery-chip" target="_blank">Grubhub</a>
+      <a href="https://postmates.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" class="delivery-chip" target="_blank">Postmates</a>
+    </div>
+  </div>
+</div>
+
+<div class="info-row">
+  <div class="info-box"><p class="info-box-label">Address</p><p class="info-box-val">5 E 8th Ave<br>Eugene, OR 97401</p></div>
+  <div class="info-box"><p class="info-box-label">Phone</p><p class="info-box-val"><a href="tel:5416863464">(541) 686-3464</a></p></div>
+  <div class="info-box"><p class="info-box-label">Hours</p><p class="info-box-val">Mon–Thu &amp; Sun: 11:30–9:15 PM<br>Fri–Sat: 11:30–9:45 PM</p></div>
+</div>
+
+<footer>
+  <p>© 2026 Sushi Ya — Eugene, Oregon</p>
+  <a href="index.html" class="back-link">← All Designs</a>
+</footer>
+</body>
+</html>

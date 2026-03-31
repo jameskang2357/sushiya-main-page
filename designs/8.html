@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design 8: Edo Crimson — Sushi Ya</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;900&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans JP',sans-serif;background:#faf8f5;color:#1a1010;}
+nav{padding:28px 60px;display:flex;justify-content:space-between;align-items:center;background:#c8000a;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Noto Serif JP',serif;font-size:24px;font-weight:600;color:#fff;letter-spacing:2px;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:300;letter-spacing:2px;transition:color .2s;}
+.nav-links a:hover{color:#fff;}
+.nav-order-btn{background:#fff;color:#c8000a;padding:10px 24px;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1px;}
+
+.hero{display:grid;grid-template-columns:60px 1fr;min-height:88vh;}
+.hero-sidebar{background:#c8000a;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;text-orientation:mixed;}
+.hero-sidebar p{font-family:'Noto Serif JP',serif;font-size:13px;letter-spacing:6px;color:rgba(255,255,255,.6);transform:rotate(180deg);}
+.hero-main{display:grid;grid-template-columns:1fr 1fr;}
+.hero-text{padding:80px 60px;display:flex;flex-direction:column;justify-content:center;background:#faf8f5;}
+.hero-jp{font-family:'Noto Serif JP',serif;font-size:88px;font-weight:900;line-height:1;color:#c8000a;opacity:.08;letter-spacing:-2px;margin-bottom:-30px;}
+.hero-text h1{font-family:'Noto Serif JP',serif;font-size:clamp(40px,4.5vw,62px);font-weight:600;line-height:1.25;color:#1a1010;margin-bottom:24px;position:relative;z-index:1;}
+.hero-text p{font-size:15px;line-height:1.9;color:#5a3030;margin-bottom:44px;}
+.btn-red{display:inline-block;background:#c8000a;color:#fff;padding:14px 36px;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;margin-right:16px;transition:background .2s;}
+.btn-red:hover{background:#a00008;}
+.btn-outline-red{display:inline-block;border:2px solid #c8000a;color:#c8000a;padding:12px 36px;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:2px;transition:all .2s;}
+.btn-outline-red:hover{background:#c8000a;color:#fff;}
+.hero-info{background:#1a1010;padding:80px 52px;display:flex;flex-direction:column;justify-content:center;gap:40px;}
+.info-card{border-left:3px solid #c8000a;padding-left:20px;}
+.info-card-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#c8000a;margin-bottom:8px;}
+.info-card-val{font-size:15px;color:rgba(250,248,245,.7);line-height:1.7;}
+.info-card-val a{color:#c8000a;text-decoration:none;}
+
+.pattern-strip{height:8px;background:repeating-linear-gradient(90deg,#c8000a 0,#c8000a 20px,#1a1010 20px,#1a1010 40px);}
+
+.menu-section{padding:80px 60px;}
+.menu-top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:baseline;margin-bottom:56px;border-bottom:2px solid #1a1010;padding-bottom:24px;}
+.menu-top h2{font-family:'Noto Serif JP',serif;font-size:48px;font-weight:600;color:#1a1010;}
+.menu-top p{font-size:15px;color:#5a3030;}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.menu-card{border:1px solid #e0d0c0;padding:32px 28px;position:relative;overflow:hidden;transition:all .3s;}
+.menu-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:#c8000a;transition:height .3s;}
+.menu-card:hover{border-color:#c8000a;}
+.menu-card:hover::before{height:100%;}
+.menu-card h3{font-family:'Noto Serif JP',serif;font-size:19px;font-weight:600;color:#1a1010;margin-bottom:8px;}
+.menu-card p{font-size:13px;color:#7a5050;line-height:1.6;}
+.menu-card-num{font-size:40px;font-weight:900;color:#f0e8e0;position:absolute;bottom:12px;right:16px;font-family:'Noto Serif JP',serif;line-height:1;}
+
+.order-band{background:#c8000a;padding:64px 60px;display:flex;justify-content:space-between;align-items:center;}
+.order-band h2{font-family:'Noto Serif JP',serif;font-size:40px;font-weight:600;color:#fff;}
+.order-right{display:flex;flex-direction:column;gap:16px;align-items:flex-end;}
+.btn-white{background:#fff;color:#c8000a;padding:14px 32px;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:1px;transition:all .2s;display:inline-block;}
+.btn-white:hover{background:#faf8f5;}
+.deliver-list{display:flex;gap:20px;}
+.deliver-list a{color:rgba(255,255,255,.7);text-decoration:none;font-size:12px;letter-spacing:1px;transition:color .2s;}
+.deliver-list a:hover{color:#fff;}
+
+footer{padding:32px 60px;background:#1a1010;display:flex;justify-content:space-between;align-items:center;}
+footer p{font-size:12px;color:rgba(250,248,245,.35);letter-spacing:1px;}
+.back-link{color:#c8000a;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">鮨家 · Sushi Ya</div>
+  <ul class="nav-links">
+    <li><a href="#">Menu</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li>
+    <li><a href="https://sushiya.menufy.com/" class="nav-order-btn" target="_blank">Order</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-sidebar"><p>Eugene, Oregon — Est. Downtown</p></div>
+  <div class="hero-main">
+    <div class="hero-text">
+      <div class="hero-jp">鮨</div>
+      <h1>Authentic Japanese Cuisine in Eugene</h1>
+      <p>From fresh nigiri and sashimi to rich ramen and bento boxes — Sushi Ya brings the full breadth of Japanese cuisine to downtown Eugene, seven days a week.</p>
+      <div>
+        <a href="https://sushiya.menufy.com/" class="btn-red" target="_blank">Order Online</a>
+        <a href="../menu.html" class="btn-outline-red">View Menu</a>
+      </div>
+    </div>
+    <div class="hero-info">
+      <div class="info-card"><p class="info-card-label">Location</p><p class="info-card-val">5 E 8th Ave<br>Eugene, OR 97401</p></div>
+      <div class="info-card"><p class="info-card-label">Phone</p><p class="info-card-val"><a href="tel:5416863464">(541) 686-3464</a></p></div>
+      <div class="info-card"><p class="info-card-label">Hours</p><p class="info-card-val">Mon–Thu &amp; Sun<br>11:30 AM – 9:15 PM<br><br>Fri–Sat<br>11:30 AM – 9:45 PM</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="pattern-strip"></div>
+
+<section class="menu-section">
+  <div class="menu-top">
+    <h2>Our Menu</h2>
+    <p>Fresh ingredients, traditional preparation, served daily in Eugene.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card"><h3>Sushi &amp; Sashimi</h3><p>Fresh fish, expertly prepared by our skilled chefs</p><div class="menu-card-num">一</div></div>
+    <div class="menu-card"><h3>Combos &amp; Bentos</h3><p>Complete meals with rice, salad, and your choice of main</p><div class="menu-card-num">二</div></div>
+    <div class="menu-card"><h3>Entrées</h3><p>Teriyaki, katsu, tempura, and grilled dishes</p><div class="menu-card-num">三</div></div>
+    <div class="menu-card"><h3>Appetizers &amp; Salads</h3><p>Traditional Japanese starters and fresh salads</p><div class="menu-card-num">四</div></div>
+    <div class="menu-card"><h3>Ramen &amp; Noodles</h3><p>Rich broths, udon, yakisoba, and donburi</p><div class="menu-card-num">五</div></div>
+    <div class="menu-card"><h3>Sides &amp; Drinks</h3><p>Sake, miso soup, rice, mochi ice cream</p><div class="menu-card-num">六</div></div>
+  </div>
+</section>
+
+<div class="order-band">
+  <h2>Order for Pickup or Delivery</h2>
+  <div class="order-right">
+    <a href="https://sushiya.menufy.com/" class="btn-white" target="_blank">Order on Menufy</a>
+    <div class="deliver-list">
+      <a href="https://www.doordash.com/en/store/sushi-ya-eugene-373640/935563/" target="_blank">DoorDash</a>
+      <a href="https://www.ubereats.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" target="_blank">Uber Eats</a>
+      <a href="https://www.grubhub.com/restaurant/sushi-ya-5-e-8th-ave-eugene/330358" target="_blank">Grubhub</a>
+      <a href="https://postmates.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" target="_blank">Postmates</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Sushi Ya · 5 E 8th Ave, Eugene OR 97401</p>
+  <a href="index.html" class="back-link">← All Designs</a>
+</footer>
+</body>
+</html>
