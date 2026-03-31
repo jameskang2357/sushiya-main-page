@@ -3,45 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary Meta Tags -->
-    <title>Sushi Ya - Modern Japanese Cuisine in Eugene, Oregon</title>
-    <meta name="title" content="Sushi Ya - Modern Japanese Cuisine in Eugene, Oregon">
-    <meta name="description" content="Sushi Ya offers modern Japanese cuisine, fresh sushi, and innovative dishes in the heart of Eugene, Oregon. Order online for pickup or delivery.">
+    <title>Sushi Ya - Japanese Cuisine in Eugene, Oregon</title>
+    <meta name="title" content="Sushi Ya - Japanese Cuisine in Eugene, Oregon">
+    <meta name="description" content="Sushi Ya offers Japanese cuisine, fresh sushi, ramen, and traditional dishes in the heart of Eugene, Oregon. Order online for pickup or delivery.">
     <meta name="keywords" content="sushi, Japanese restaurant, Eugene Oregon, sashimi, ramen, bento boxes, Japanese cuisine, Eugene sushi, order sushi online">
     <meta name="author" content="Sushi Ya">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://eugenesushi.com/">
-    <meta property="og:title" content="Sushi Ya - Modern Japanese Cuisine in Eugene, Oregon">
-    <meta property="og:description" content="Sushi Ya offers modern Japanese cuisine, fresh sushi, and innovative dishes in the heart of Eugene, Oregon. Order online for pickup or delivery.">
+    <meta property="og:title" content="Sushi Ya - Japanese Cuisine in Eugene, Oregon">
+    <meta property="og:description" content="Sushi Ya offers Japanese cuisine, fresh sushi, ramen, and traditional dishes in the heart of Eugene, Oregon. Order online for pickup or delivery.">
     <meta property="og:image" content="https://eugenesushi.com/og-image.jpg">
     <meta property="og:site_name" content="Sushi Ya">
     <meta property="og:locale" content="en_US">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://eugenesushi.com/">
-    <meta property="twitter:title" content="Sushi Ya - Modern Japanese Cuisine in Eugene, Oregon">
-    <meta property="twitter:description" content="Sushi Ya offers modern Japanese cuisine, fresh sushi, and innovative dishes in the heart of Eugene, Oregon. Order online for pickup or delivery.">
+    <meta property="twitter:title" content="Sushi Ya - Japanese Cuisine in Eugene, Oregon">
+    <meta property="twitter:description" content="Sushi Ya offers Japanese cuisine, fresh sushi, ramen, and traditional dishes in the heart of Eugene, Oregon. Order online for pickup or delivery.">
     <meta property="twitter:image" content="https://eugenesushi.com/og-image.jpg">
-    
+
     <!-- Additional SEO -->
     <meta name="geo.region" content="US-OR">
     <meta name="geo.placename" content="Eugene">
     <meta name="geo.position" content="44.0521;-123.0868">
     <meta name="ICBM" content="44.0521, -123.0868">
-    
+
     <!-- Canonical -->
     <link rel="canonical" href="https://eugenesushi.com/">
 
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
     {
@@ -49,7 +48,7 @@
         "@type": "Restaurant",
         "name": "Sushi Ya",
         "image": "https://eugenesushi.com/og-image.jpg",
-        "description": "Modern Japanese cuisine, fresh sushi, and innovative dishes in the heart of Eugene, Oregon.",
+        "description": "Japanese cuisine, fresh sushi, and traditional dishes in the heart of Eugene, Oregon.",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "5 E 8th Ave",
@@ -93,30 +92,18 @@
             "@type": "OfferCatalog",
             "name": "Sushi Ya Menu",
             "itemListElement": [
-                {
-                    "@type": "OfferCatalog",
-                    "name": "Sushi & Sashimi"
-                },
-                {
-                    "@type": "OfferCatalog",
-                    "name": "Lunch Specials"
-                },
-                {
-                    "@type": "OfferCatalog",
-                    "name": "Dinner Entrées"
-                },
-                {
-                    "@type": "OfferCatalog",
-                    "name": "Ramen & Noodles"
-                }
+                { "@type": "OfferCatalog", "name": "Sushi & Sashimi" },
+                { "@type": "OfferCatalog", "name": "Lunch Specials" },
+                { "@type": "OfferCatalog", "name": "Dinner Entrées" },
+                { "@type": "OfferCatalog", "name": "Ramen & Noodles" }
             ]
         }
     }
     </script>
-    
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Didact+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -127,27 +114,9 @@
                 <li><a href="/menu">Menu</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact-form-section">Contact</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="https://sushiya.menufy.com/" class="btn-order" target="_blank" rel="noopener noreferrer">Order</a></li>
             </ul>
-            <div class="theme-picker">
-                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Change theme" title="Preview themes">🎨</button>
-                <div class="theme-dropdown" id="themeDropdown">
-                    <p class="theme-dropdown-title">Preview Themes</p>
-                    <div class="theme-swatches">
-                        <button class="theme-swatch active" data-theme="" title="Rustic" style="background:#2a1810; outline-color:#d4a574;"></button>
-                        <button class="theme-swatch" data-theme="sakura" title="Sakura" style="background:#3d1030; outline-color:#e8829a;"></button>
-                        <button class="theme-swatch" data-theme="midnight" title="Midnight" style="background:#0d1b2a; outline-color:#64b5f6;"></button>
-                        <button class="theme-swatch" data-theme="bamboo" title="Bamboo" style="background:#1a2e1a; outline-color:#8bc34a;"></button>
-                        <button class="theme-swatch" data-theme="lantern" title="Lantern" style="background:#8b0000; outline-color:#ffd700;"></button>
-                        <button class="theme-swatch" data-theme="washi" title="Washi" style="background:#1a1a1a; outline-color:#c0a060;"></button>
-                        <button class="theme-swatch" data-theme="ocean" title="Ocean" style="background:#0a2540; outline-color:#20c0a0;"></button>
-                        <button class="theme-swatch" data-theme="charcoal" title="Charcoal" style="background:#2a2a2a; outline-color:#d4a030;"></button>
-                        <button class="theme-swatch" data-theme="matcha" title="Matcha" style="background:#2d3a20; outline-color:#a0b870;"></button>
-                        <button class="theme-swatch" data-theme="slate" title="Slate" style="background:#1e2a38; outline-color:#e8b460;"></button>
-                    </div>
-                </div>
-            </div>
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -157,89 +126,129 @@
     </nav>
 
     <section id="home" class="hero">
-        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h2>Modern Japanese Cuisine</h2>
-            <p>Fresh flavors and innovative dishes in Eugene</p>
+            <div class="hero-rule"></div>
+            <h2>The Art of<br><em>Japanese</em> Cuisine<br>in Eugene</h2>
+            <p>Fresh sushi, handcrafted ramen, and traditional dishes prepared with care every day.</p>
             <div class="hero-buttons">
-                <a href="https://sushiya.menufy.com/" class="btn" target="_blank" rel="noopener noreferrer">Order Online</a>
-                <a href="/menu" class="btn btn-secondary">View Menu</a>
+                <a href="https://sushiya.menufy.com/" class="btn btn-gold" target="_blank" rel="noopener noreferrer">Order Online</a>
+                <a href="/menu" class="btn btn-outline">View Menu</a>
+            </div>
+        </div>
+        <p class="scroll-hint">Scroll to explore</p>
+    </section>
+
+    <div class="info-bar">
+        <div class="info-bar-cell">
+            <p class="info-bar-label">Location</p>
+            <p class="info-bar-val">5 E 8th Ave · Eugene, OR</p>
+        </div>
+        <div class="info-bar-cell">
+            <p class="info-bar-label">Hours</p>
+            <p class="info-bar-val">Mon–Thu &amp; Sun: 11:30 AM – 9:15 PM<br>Fri &amp; Sat: 11:30 AM – 9:45 PM</p>
+        </div>
+        <div class="info-bar-cell">
+            <p class="info-bar-label">Contact</p>
+            <p class="info-bar-val"><a href="tel:5416863464">(541) 686-3464</a></p>
+        </div>
+    </div>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-left">
+                    <h2>Japanese cuisine, made with <em>intention</em></h2>
+                    <p>Sushi Ya brings the full breadth of Japanese cuisine to downtown Eugene — from fresh nigiri to rich ramen, bento boxes to tempura. We're open seven days a week.</p>
+                    <p>Located at 5 E 8th Ave, we offer dine-in and online ordering through multiple platforms.</p>
+                </div>
+                <div class="about-right">
+                    <div class="about-stat">
+                        <div class="about-stat-num">7</div>
+                        <div class="about-stat-label">Days Open Per Week</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-num">13+</div>
+                        <div class="about-stat-label">Menu Categories</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-num">5</div>
+                        <div class="about-stat-label">Delivery Platforms</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="menu" class="menu-section">
         <div class="container">
-            <h2 class="section-title">Our Menu</h2>
-            <p class="section-subtitle">Explore our selection of modern Japanese dishes</p>
-            
+            <div class="section-header">
+                <h2>Our Menu</h2>
+                <p>Explore the full breadth of Japanese cuisine</p>
+            </div>
             <div class="menu-categories">
                 <a href="/menu#sushi-sashimi" class="menu-category-link">
                     <div class="menu-category">
-                        <h3>Sushi & Sashimi</h3>
-                        <p>Fresh fish, expertly prepared by our skilled sushi chefs</p>
+                        <p class="menu-item-idx">01</p>
+                        <h3>Sushi &amp; Sashimi</h3>
+                        <p>Fresh fish, expertly prepared by our skilled chefs</p>
                     </div>
                 </a>
                 <a href="/menu#lunch-specials" class="menu-category-link">
                     <div class="menu-category">
-                        <h3>Lunch Specials</h3>
-                        <p>Perfect midday meals with bento boxes and lunch combos</p>
+                        <p class="menu-item-idx">02</p>
+                        <h3>Combos &amp; Bentos</h3>
+                        <p>Complete meals with rice, salad, and your choice of main</p>
                     </div>
                 </a>
                 <a href="/menu#dinner-entrees" class="menu-category-link">
                     <div class="menu-category">
-                        <h3>Dinner Entrées</h3>
-                        <p>Modern Japanese dishes for dinner</p>
+                        <p class="menu-item-idx">03</p>
+                        <h3>Entrées</h3>
+                        <p>Teriyaki, katsu, tempura, and grilled dishes</p>
                     </div>
                 </a>
                 <a href="/menu#appetizers-salads" class="menu-category-link">
                     <div class="menu-category">
-                        <h3>Appetizers & Salads</h3>
-                        <p>Start your meal with our selection of appetizers</p>
+                        <p class="menu-item-idx">04</p>
+                        <h3>Appetizers &amp; Salads</h3>
+                        <p>Traditional Japanese starters and fresh salads</p>
                     </div>
                 </a>
                 <a href="/menu#ramen-noodles" class="menu-category-link">
                     <div class="menu-category">
-                        <h3>Ramen & Noodles</h3>
-                        <p>Comforting bowls of ramen and modern noodle dishes</p>
+                        <p class="menu-item-idx">05</p>
+                        <h3>Ramen &amp; Noodles</h3>
+                        <p>Rich broths, udon, yakisoba, and donburi</p>
                     </div>
                 </a>
                 <a href="/menu#drinks-desserts" class="menu-category-link">
                     <div class="menu-category">
-                        <h3>Drinks & Desserts</h3>
-                        <p>Complete your meal with beverages and sweet treats</p>
+                        <p class="menu-item-idx">06</p>
+                        <h3>Sides &amp; Drinks</h3>
+                        <p>Sake, miso soup, rice, mochi ice cream</p>
                     </div>
                 </a>
             </div>
-
             <div class="menu-cta">
-                <a href="/menu" class="btn">View Full Menu</a>
-                <a href="https://sushiya.menufy.com/" class="btn btn-order-online" target="_blank" rel="noopener noreferrer">Order Online</a>
+                <a href="/menu" class="btn btn-gold">View Full Menu</a>
             </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container">
-            <h2>Our Story</h2>
-            <p>Bringing modern Japanese cuisine to Eugene with innovative techniques and fresh, quality ingredients. Our menu features a complete selection including fresh sushi and sashimi, bento boxes, tempura, ramen, and creative rolls.</p>
-            <p>Whether you're dining in or ordering for delivery, we're committed to providing you with exceptional quality and contemporary dining experiences. Located in downtown Eugene, Sushi Ya is perfect for casual dining, family meals, or group gatherings.</p>
         </div>
     </section>
 
     <section id="gallery" class="gallery-section">
         <div class="container">
-            <h2 class="section-title">Gallery</h2>
-            <p class="section-subtitle">A glimpse of our restaurant and cuisine</p>
+            <div class="section-header">
+                <h2>Gallery</h2>
+                <p>A glimpse of our restaurant and cuisine</p>
+            </div>
             <div class="gallery-mobile-notice">
-                <p>📸 View our full photo gallery</p>
-                <a href="/gallery" class="btn btn-gallery-mobile">View Gallery</a>
+                <p>View our full photo gallery</p>
+                <a href="/gallery" class="btn btn-gold">View Gallery</a>
             </div>
             <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery images will be dynamically generated by JavaScript -->
                 <div class="gallery-loading" id="galleryLoading">Loading gallery...</div>
             </div>
-            
+
             <!-- Image Lightbox Modal -->
             <div id="lightboxModal" class="lightbox-modal">
                 <div class="lightbox-overlay"></div>
@@ -254,9 +263,24 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section class="order-section">
+        <h2>Ready to <em>order?</em></h2>
+        <p>Available for pickup and delivery</p>
+        <div class="delivery-grid">
+            <a href="https://sushiya.menufy.com/" class="delivery-item primary" target="_blank" rel="noopener noreferrer">Order on Menufy</a>
+            <a href="https://www.doordash.com/en/store/sushi-ya-eugene-373640/935563/?srsltid=AfmBOoqktO5qqdBEGI0JyvLXuLAQZ88UdnI_OBLMnba6C6cG1D3_A7rs" class="delivery-item" target="_blank" rel="noopener noreferrer">DoorDash</a>
+            <a href="https://www.ubereats.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w?srsltid=AfmBOorZCoyX78WVqvFmZgIx_hdVKGoIR7Y0HOu0MfZSyz_R0_9p-upf" class="delivery-item" target="_blank" rel="noopener noreferrer">Uber Eats</a>
+            <a href="https://www.grubhub.com/restaurant/sushi-ya-5-e-8th-ave-eugene/330358" class="delivery-item" target="_blank" rel="noopener noreferrer">Grubhub</a>
+            <a href="https://postmates.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" class="delivery-item" target="_blank" rel="noopener noreferrer">Postmates</a>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
         <div class="container">
-            <h2>Visit Us</h2>
+            <div class="section-header section-header-light">
+                <h2>Visit Us</h2>
+                <p>We'd love to see you at our downtown Eugene location</p>
+            </div>
             <div class="contact-info">
                 <div class="contact-item">
                     <h3>Location</h3>
@@ -269,70 +293,28 @@
                 <div class="contact-item">
                     <h3>Hours</h3>
                     <p>
-                        <strong>Mon - Thu:</strong> 11:30 AM - 9:15 PM<br>
-                        <strong>Fri & Sat:</strong> 11:30 AM - 9:45 PM<br>
-                        <strong>Sun:</strong> 11:30 AM - 9:15 PM
+                        <strong>Mon – Thu:</strong> 11:30 AM – 9:15 PM<br>
+                        <strong>Fri &amp; Sat:</strong> 11:30 AM – 9:45 PM<br>
+                        <strong>Sun:</strong> 11:30 AM – 9:15 PM
                     </p>
                 </div>
             </div>
-            <div class="contact-cta">
-                <a href="https://sushiya.menufy.com/" class="btn" target="_blank" rel="noopener noreferrer">Order Online</a>
-            </div>
-            
-            <div class="delivery-platforms">
-                <h3>Also Available On</h3>
-                <div class="delivery-links">
-                    <a href="https://www.doordash.com/en/store/sushi-ya-eugene-373640/935563/?srsltid=AfmBOoqktO5qqdBEGI0JyvLXuLAQZ88UdnI_OBLMnba6C6cG1D3_A7rs" 
-                       class="delivery-link" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       aria-label="Order on DoorDash">
-                        <span class="delivery-icon">🚚</span>
-                        <span>DoorDash</span>
-                    </a>
-                    <a href="https://www.ubereats.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w?srsltid=AfmBOorZCoyX78WVqvFmZgIx_hdVKGoIR7Y0HOu0MfZSyz_R0_9p-upf" 
-                       class="delivery-link" 
-                       target="_blank" 
-                       rel="noopener"
-                       aria-label="Order on Uber Eats">
-                        <span class="delivery-icon">🍽️</span>
-                        <span>Uber Eats</span>
-                    </a>
-                    <a href="https://www.grubhub.com/restaurant/sushi-ya-5-e-8th-ave-eugene/330358" 
-                       class="delivery-link" 
-                       target="_blank" 
-                       rel="noopener"
-                       aria-label="Order on Grubhub">
-                        <span class="delivery-icon">📦</span>
-                        <span>Grubhub</span>
-                    </a>
-                    <a href="https://postmates.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" 
-                       class="delivery-link" 
-                       target="_blank" 
-                       rel="noopener"
-                       aria-label="Order on Postmates">
-                        <span class="delivery-icon">🛵</span>
-                        <span>Postmates</span>
-                    </a>
-                </div>
-            </div>
-            
+
             <div class="map-container">
-                <h3>Find Us</h3>
                 <div class="map-wrapper">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2867.5!2d-123.0868!3d44.0521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54c11e135fbb1edd%3A0x4c424dcc3ebc93b5!2sSushi%20Ya!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus" 
-                        width="100%" 
-                        height="400" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2867.5!2d-123.0868!3d44.0521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54c11e135fbb1edd%3A0x4c424dcc3ebc93b5!2sSushi%20Ya!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus"
+                        width="100%"
+                        height="400"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"
                         title="Sushi Ya Location - 5 E 8th Ave, Eugene, OR 97401">
                     </iframe>
                 </div>
                 <p class="map-link">
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=5+E+8th+Ave,+Eugene,+OR+97401" target="_blank" rel="noopener noreferrer">Get Directions</a>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=5+E+8th+Ave,+Eugene,+OR+97401" target="_blank" rel="noopener noreferrer">Get Directions →</a>
                 </p>
             </div>
         </div>
@@ -340,11 +322,12 @@
 
     <section id="contact-form-section" class="contact-form-section">
         <div class="container">
-            <h2 class="section-title">Send Us a Message</h2>
-            <p class="section-subtitle">Have a question or want to make a reservation? We'd love to hear from you!</p>
-            
+            <div class="section-header">
+                <h2>Send Us a Message</h2>
+                <p>Have a question or want to make a reservation? We'd love to hear from you.</p>
+            </div>
+
             <form id="contactForm" class="contact-form">
-                
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Name *</label>
@@ -355,21 +338,21 @@
                         <input type="email" id="email" name="email" required placeholder="your.email@example.com" maxlength="254" autocomplete="email">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="phone">Phone</label>
                     <input type="tel" id="phone" name="phone" placeholder="(541) 555-1234" maxlength="20" autocomplete="tel">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="message">Message *</label>
                     <textarea id="message" name="message" rows="6" required placeholder="Tell us how we can help you..." maxlength="2000"></textarea>
                 </div>
-                
+
                 <div class="form-submit">
-                    <button type="submit" class="btn btn-submit">Send Message</button>
+                    <button type="submit" class="btn btn-gold btn-submit">Send Message</button>
                 </div>
-                
+
                 <div id="formStatus" class="form-status"></div>
             </form>
         </div>
@@ -380,14 +363,14 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Sushi Ya</h4>
-                    <p>Modern Japanese cuisine in Eugene, Oregon</p>
+                    <p>Japanese cuisine in Eugene, Oregon</p>
                 </div>
                 <div class="footer-section">
                     <h4>Order Online</h4>
                     <div class="footer-delivery-links">
                         <a href="https://sushiya.menufy.com/" target="_blank" rel="noopener noreferrer">Menufy</a>
-                        <a href="https://www.doordash.com/en/store/sushi-ya-eugene-373640/935563/?srsltid=AfmBOoqktO5qqdBEGI0JyvLXuLAQZ88UdnI_OBLMnba6C6cG1D3_A7rs" target="_blank" rel="noopener noreferrer">DoorDash</a>
-                        <a href="https://www.ubereats.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w?srsltid=AfmBOorZCoyX78WVqvFmZgIx_hdVKGoIR7Y0HOu0MfZSyz_R0_9p-upf" target="_blank" rel="noopener noreferrer">Uber Eats</a>
+                        <a href="https://www.doordash.com/en/store/sushi-ya-eugene-373640/935563/" target="_blank" rel="noopener noreferrer">DoorDash</a>
+                        <a href="https://www.ubereats.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" target="_blank" rel="noopener noreferrer">Uber Eats</a>
                         <a href="https://www.grubhub.com/restaurant/sushi-ya-5-e-8th-ave-eugene/330358" target="_blank" rel="noopener noreferrer">Grubhub</a>
                         <a href="https://postmates.com/store/sushi-ya/x35GZODRTVyFY7tYUYey3w" target="_blank" rel="noopener noreferrer">Postmates</a>
                     </div>
@@ -398,6 +381,6 @@
     </footer>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>
