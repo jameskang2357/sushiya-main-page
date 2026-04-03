@@ -111,7 +111,9 @@ body {
    ============================================= */
 .hero {
     height: 100vh;
-    background: linear-gradient(170deg, var(--dark) 0%, var(--dark2) 60%, var(--dark) 100%);
+    background:
+        linear-gradient(170deg, rgba(20,14,10,0.82) 0%, rgba(40,28,16,0.75) 60%, rgba(20,14,10,0.85) 100%),
+        url('/img/bigboat.JPG') center center / cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,12 +122,6 @@ body {
     overflow: hidden;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 60% 40%, rgba(180,140,80,0.08) 0%, transparent 60%);
-}
 
 .hero-content {
     position: relative;
