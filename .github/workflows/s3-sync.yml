@@ -54,3 +54,14 @@ jobs:
             --exclude "README.md" \
             --delete  # Remove files in S3 that don't exist locally
 
+      - name: Invalidate CloudFront cache
+        env:
+          DIST_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          if [ -n "$DIST_ID" ]; then
+            aws cloudfront create-invalidation --distribution-id "$DIST_ID" --paths "/*"
+          else
+            echo "CLOUDFRONT_DISTRIBUTION_ID secret not set — skipping invalidation."
+            echo "Run 'aws cloudfront create-invalidation --distribution-id E2DURGSN8PGXJT --paths \"/*\"' manually, or add the secret."
+          fi
+
