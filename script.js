@@ -474,9 +474,42 @@ function initLightboxListeners() {
     });
 }
 
+/**
+ * Open/Closed status based on Pacific time and hard-coded hours.
+ * Sun-Thu: 11:30 - 21:30, Fri-Sat: 11:30 - 22:00
+ */
+function isOpenNow() {
+    const fmt = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+    const parts = fmt.formatToParts(new Date());
+    const day = parts.find(p => p.type === 'weekday').value;
+    const hour = parseInt(parts.find(p => p.type === 'hour').value, 10);
+    const minute = parseInt(parts.find(p => p.type === 'minute').value, 10);
+    const mins = hour * 60 + minute;
+    const open = 11 * 60 + 30;
+    const close = (day === 'Fri' || day === 'Sat') ? (22 * 60) : (21 * 60 + 30);
+    return mins >= open && mins < close;
+}
+
+function updateOpenStatus() {
+    const open = isOpenNow();
+    document.querySelectorAll('[data-open-status]').forEach(el => {
+        el.textContent = open ? 'Open Now' : 'Closed';
+        el.classList.remove('is-open', 'is-closed');
+        el.classList.add(open ? 'is-open' : 'is-closed', 'ready');
+    });
+}
+
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
     initLightboxListeners();
+    updateOpenStatus();
+    setInterval(updateOpenStatus, 60 * 1000);
 });
 

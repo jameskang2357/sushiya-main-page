@@ -262,6 +262,86 @@ body {
 
 .info-bar-val a:hover { color: var(--gold); }
 
+.open-status {
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.open-status.ready { opacity: 1; }
+
+.open-status::before {
+    content: "● ";
+    margin-right: 4px;
+}
+
+.open-status.is-open { color: #2e7d32; }
+.open-status.is-closed { color: #b94a3b; }
+
+.open-status-dark.is-open { color: #6ec977; }
+.open-status-dark.is-closed { color: #e87264; }
+
+/* =============================================
+   404 PAGE
+   ============================================= */
+.not-found {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: var(--bg-alt);
+    padding: 60px 20px;
+}
+
+.not-found-code {
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: clamp(72px, 14vw, 140px);
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
+.not-found h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 16px;
+}
+
+.not-found-msg {
+    font-size: 17px;
+    color: var(--mid);
+    font-style: italic;
+    margin-bottom: 36px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.not-found-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-outline-dark {
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    background: transparent;
+}
+
+.btn-outline-dark:hover {
+    background: var(--dark);
+    color: #fff;
+}
+
 /* =============================================
    ABOUT SECTION
    ============================================= */
@@ -326,14 +406,8 @@ body {
 }
 
 /* =============================================
-   MENU SECTION
+   SECTION HEADER
    ============================================= */
-.menu-section {
-    padding: 100px 0;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-}
-
 .section-header {
     text-align: center;
     margin-bottom: 64px;
@@ -354,55 +428,6 @@ body {
 
 .section-header-light h2 { color: rgba(255,255,255,0.9); }
 .section-header-light p { color: rgba(255,255,255,0.45); }
-
-.menu-categories {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-bottom: 52px;
-}
-
-.menu-category-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.menu-category {
-    background: var(--bg);
-    padding: 44px 32px;
-    transition: background 0.3s;
-}
-
-.menu-category:hover { background: var(--bg-alt); }
-
-.menu-item-idx {
-    font-family: 'Didact Gothic', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-}
-
-.menu-category h3 {
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--dark);
-    margin-bottom: 8px;
-}
-
-.menu-category p {
-    font-size: 14px;
-    font-style: italic;
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-.menu-cta {
-    text-align: center;
-}
 
 /* =============================================
    GALLERY SECTION
@@ -876,140 +901,10 @@ body {
 }
 
 /* =============================================
-   MENU PAGE STYLES
-   ============================================= */
-.menu-hero {
-    padding: 120px 40px 80px;
-    text-align: center;
-    background: linear-gradient(170deg, var(--dark) 0%, var(--dark2) 100%);
-    color: #fff;
-    margin-top: 66px;
-}
-
-.menu-hero h1 {
-    font-size: clamp(28px, 4vw, 52px);
-    font-weight: 400;
-    margin-bottom: 12px;
-    color: #fff;
-}
-
-.menu-hero p {
-    font-size: 18px;
-    color: var(--gold);
-    font-style: italic;
-}
-
-.menu-category-section {
-    padding: 80px 0;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-}
-
-.menu-category-section:nth-child(even) { background: var(--bg-alt); }
-
-.menu-category-title {
-    font-size: clamp(24px, 3vw, 40px);
-    font-weight: 400;
-    margin-bottom: 8px;
-    color: var(--dark);
-    text-align: center;
-}
-
-.menu-category-description {
-    text-align: center;
-    color: var(--muted);
-    font-size: 17px;
-    font-style: italic;
-    margin-bottom: 48px;
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.menu-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    margin-top: 40px;
-}
-
-.menu-item {
-    background: var(--bg);
-    padding: 32px;
-    transition: background 0.3s;
-}
-
-.menu-category-section:nth-child(even) .menu-item { background: var(--bg-alt); }
-
-.menu-item:hover { background: var(--bg-alt); }
-
-.menu-item-header h3 {
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 6px;
-    color: var(--dark);
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-}
-
-.menu-item-description {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 16px;
-    font-style: italic;
-    line-height: 1.6;
-}
-
-.menu-item-list {
-    list-style: none;
-    padding: 0;
-}
-
-.menu-item-list li {
-    padding: 7px 0 7px 16px;
-    color: var(--mid);
-    font-size: 15px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-}
-
-.menu-item-list li:last-child { border-bottom: none; }
-
-.menu-item-list li::before {
-    content: '·';
-    color: var(--gold);
-    position: absolute;
-    left: 0;
-}
-
-.menu-cta-section {
-    padding: 80px 40px;
-    text-align: center;
-    background: var(--dark);
-    color: #fff;
-}
-
-.menu-cta-section h2 {
-    font-size: clamp(24px, 3vw, 40px);
-    font-weight: 400;
-    margin-bottom: 12px;
-    color: var(--gold);
-}
-
-.menu-cta-section p {
-    font-size: 17px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 32px;
-    font-style: italic;
-}
-
-/* =============================================
    RESPONSIVE
    ============================================= */
 @media (max-width: 900px) {
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
-    .menu-categories { grid-template-columns: repeat(2, 1fr); }
     .contact-info { grid-template-columns: 1fr; }
     .info-bar { grid-template-columns: 1fr; }
     .info-bar-cell { border-right: none; border-bottom: 1px solid var(--border); }
@@ -1054,8 +949,6 @@ body {
 
     .info-bar-cell { padding: 28px 24px; }
 
-    .menu-categories { grid-template-columns: 1fr; }
-    .menu-category { padding: 28px 24px; }
     .form-row { grid-template-columns: 1fr; }
     .map-wrapper iframe { height: 280px; }
 
@@ -1075,7 +968,7 @@ body {
     .contact-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .contact-item:last-child { border-bottom: none; }
 
-    .about-section, .menu-section, .gallery-section, .contact-form-section { padding: 60px 0; }
+    .about-section, .gallery-section, .contact-form-section { padding: 60px 0; }
     .section-header { margin-bottom: 40px; }
 
     .footer { padding: 48px 0 32px; }
@@ -1091,8 +984,7 @@ body {
     .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .info-bar-cell { padding: 22px 16px; }
     .info-bar-val { font-size: 14px; }
-    .menu-cta-section { padding: 60px 24px; }
     .about-left h2 { font-size: 26px; }
-    .about-section, .menu-section, .gallery-section, .contact-form-section { padding: 48px 0; }
+    .about-section, .gallery-section, .contact-form-section { padding: 48px 0; }
     .map-wrapper iframe { height: 240px; }
 }
