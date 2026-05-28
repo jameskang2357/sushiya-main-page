@@ -647,6 +647,55 @@ body {
 
 .delivery-item.primary:hover { background: var(--gold2); border-color: var(--gold2); }
 
+.delivery-also {
+    margin-top: 36px;
+    text-align: center;
+}
+
+.delivery-also-label {
+    display: block;
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 14px;
+}
+
+.delivery-also-list {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.delivery-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 18px;
+    min-height: 36px;
+    border-radius: 4px;
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.delivery-chip:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.25);
+}
+
+.delivery-chip-ubereats:hover { background: #06C167; border-color: #06C167; color: #fff; }
+.delivery-chip-grubhub:hover  { background: #F63440; border-color: #F63440; color: #fff; }
+.delivery-chip-postmates:hover { background: #FFDF18; border-color: #FFDF18; color: #1a1a1a; }
+
 /* =============================================
    CONTACT SECTION
    ============================================= */
