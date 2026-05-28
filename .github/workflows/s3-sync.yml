@@ -31,9 +31,9 @@ jobs:
           for img in img/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}; do
             if [ -f "$img" ]; then
               filename=$(basename "$img")
-              # Skip branding assets (logo files are in img/ but not gallery photos)
+              # Skip branding assets (logo + favicon files live in img/ but aren't gallery photos)
               case "$filename" in
-                logo*) continue ;;
+                logo*|favicon*) continue ;;
               esac
               # Create display name: remove extension, replace - and _ with spaces, title case
               displayname=$(echo "${filename%.*}" | sed 's/[-_]/ /g' | sed 's/\b\(.\)/\u\1/g')
