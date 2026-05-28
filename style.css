@@ -673,6 +673,37 @@ body {
 
 .contact-item a:hover { color: var(--gold); }
 
+.hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+}
+
+.hours-list li {
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.hours-list li:first-child { border-top: none; padding-top: 0; }
+.hours-list li:last-child { padding-bottom: 0; }
+
+.hours-day {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.hours-time {
+    display: block;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
 .map-container { text-align: center; }
 
 .map-wrapper {
