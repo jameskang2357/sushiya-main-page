@@ -30,7 +30,7 @@ body {
    NAVBAR
    ============================================= */
 .navbar {
-    padding: 22px 0;
+    padding: 12px 0;
     background: var(--dark);
     position: sticky;
     top: 0;
@@ -45,21 +45,23 @@ body {
 }
 
 .logo {
-    font-family: 'Didact Gothic', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    color: #fff;
+    margin: 0;
+    line-height: 0;
 }
 
 .logo-link {
+    display: inline-block;
     text-decoration: none;
-    color: inherit;
     transition: opacity 0.3s;
 }
 
-.logo-link:hover { opacity: 0.75; }
+.logo-link:hover { opacity: 0.85; }
+
+.logo-img {
+    display: block;
+    height: 56px;
+    width: auto;
+}
 
 .nav-menu {
     display: flex;
@@ -1019,10 +1021,12 @@ body {
 
     .hamburger { display: flex; }
 
+    .logo-img { height: 44px; }
+
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 66px;
+        top: 68px;
         flex-direction: column;
         background: var(--dark);
         width: 100%;
@@ -1080,6 +1084,7 @@ body {
 
 @media (max-width: 480px) {
     .container { padding: 0 18px; }
+    .logo-img { height: 40px; }
     .hero-content h2 { font-size: 28px; }
     .hero-content p { font-size: 15px; }
     .hero-rule { margin: 0 auto 28px; }
