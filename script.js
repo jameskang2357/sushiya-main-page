@@ -1,3 +1,40 @@
+// Google Analytics 4
+// Paste the GA4 measurement ID here (looks like 'G-XXXXXXXXXX') to enable analytics.
+// While this is an empty string, no analytics code loads and no requests are made.
+const GA_MEASUREMENT_ID = '';
+
+if (GA_MEASUREMENT_ID) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID);
+
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
+    document.head.appendChild(gaScript);
+}
+
+/**
+ * Track clicks on order links (Menufy pickup, DoorDash delivery).
+ * No-op when GA_MEASUREMENT_ID is empty.
+ */
+function initOrderClickTracking() {
+    if (!GA_MEASUREMENT_ID) return;
+
+    document.querySelectorAll('a[href*="menufy.com"]').forEach(link => {
+        link.addEventListener('click', () => {
+            gtag('event', 'order_pickup_click');
+        });
+    });
+
+    document.querySelectorAll('a[href*="doordash.com"]').forEach(link => {
+        link.addEventListener('click', () => {
+            gtag('event', 'order_delivery_click');
+        });
+    });
+}
+
 // Mobile Menu Toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
@@ -509,6 +546,7 @@ function updateOpenStatus() {
 window.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
     initLightboxListeners();
+    initOrderClickTracking();
     updateOpenStatus();
     setInterval(updateOpenStatus, 60 * 1000);
 });
